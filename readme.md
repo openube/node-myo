@@ -13,7 +13,7 @@ This is a prototype app that controls the Parrot Rolling Spider with MyoJS and P
 
 ###PebbleJS app
 
-Build ```pebblejs.js``` as an app in [cloudpebble.net] and pushed to your mobile
+Build ```pebblejs.js``` as an app in [cloudpebble.net](cloudpebble.net) and pushed to your mobile
 
 
 ###Running the app
