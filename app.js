@@ -5,12 +5,12 @@ var pebble          = require('./components/pebble'),
     keypress        = require('./components/keypress'),
     port            = 1337,
     myDrone,
-    myMyo;
+    myMyo,
+    myTunnel;
 
-//localtunnel.init(port, 'somesubdomainabc123');
-
+myTunnel = localtunnel(port, 'whitemanjuu');
 myDrone = drone.connect();
 myMyo = myo.connect(myDrone);
 pebble.setServer(port,myDrone);
-keypress.setListeners(myDrone,myMyo);
+keypress.setListeners(myDrone,myMyo,myTunnel);
 

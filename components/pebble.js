@@ -27,6 +27,7 @@ module.exports = {
 
             switch (a.type) {
                 case 'ping':
+                    console.log('Got a ping from pebble');
                     response.text = 'Success';
                     response.type = a.type;
                     break;
