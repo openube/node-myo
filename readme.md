@@ -11,12 +11,12 @@ This is a prototype app that controls the Parrot Rolling Spider with MyoJS and P
 - Bluetooth 4.0 enabled device
 - Rolling Spider drone
 
-###PebbleJS app
+###Running the PebbleJS app
 
-Build ```pebblejs.js``` as an app in [cloudpebble.net](cloudpebble.net) and pushed to your mobile
+Build ```pebblejs.js``` as an app in [cloudpebble.net](cloudpebble.net) and push to your mobile
 
 
-###Running the app
+###Running the Node app
 
 ```
 npm install
