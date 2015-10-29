@@ -2,7 +2,7 @@ var UI = require('ui'),
     ajax = require('ajax'),
     Vibe = require('ui/vibe');
 
-var ajaxUrl = "https://path.to.server.com/pebblecall",
+var ajaxUrl = "https://somesubdomainabc123.tunnel.me/pebblecall",
     droneActions = [
         {
             title: "Ping",

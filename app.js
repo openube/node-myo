@@ -7,7 +7,7 @@ var pebble          = require('./components/pebble'),
     myDrone,
     myMyo;
 
-//localtunnel.init(port, 'whitemanjuu');
+//localtunnel.init(port, 'somesubdomainabc123');
 
 myDrone = drone.connect();
 myMyo = myo.connect(myDrone);

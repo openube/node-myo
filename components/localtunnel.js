@@ -1,6 +1,6 @@
 var localtunnel = require('localtunnel'),
     opts        = {
-        subdomain: 'whitemanjuu'
+        subdomain: 'somesubdomainabc123'
     };
 
 module.exports = {
