@@ -1,7 +1,7 @@
 var keypress        = require('keypress');
 
 module.exports = {
-    setListeners : function(drone,myo){
+    setListeners : function(drone,myo,tunnel){
 
         keypress(process.stdin);
         process.stdin.resume();
@@ -16,6 +16,7 @@ module.exports = {
                 case 'q':
                 case 'escape':
                     console.log('Exit');
+                    if (tunnel) tunnel.close();
                     process.stdin.pause();
                     process.exit();
                     break;
@@ -57,6 +58,7 @@ module.exports = {
 
             if (key && key.ctrl && key.name == 'c') {
                 console.log('Exit');
+                if (tunnel) tunnel.close();
                 process.stdin.pause();
                 process.exit();
             }
