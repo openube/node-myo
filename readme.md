@@ -43,7 +43,10 @@ node app.js
 |x | Toggle lock. This toggles the drone to listen to Myo movements|
 |z | Drone land |
 |m | Emergency landing|
-|up, down, left, right | Unassigned |
+|up arrow| Forward |
+|down arrow| Backward |
+|left arrow| Turn left |
+|right arrow| Turn right |
 
 ###Myo Gestures
 
