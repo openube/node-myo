@@ -1,6 +1,7 @@
 var RollingSpider   = require('rolling-spider'),
     isReady         = false,
     hasTakeoff      = false,
+    defaultSteps    = 2,
     rollingSpider   = new RollingSpider();
 
 module.exports = {
@@ -15,13 +16,23 @@ module.exports = {
                 rollingSpider.flatTrim();
                 isReady = true;
                 console.log('rollingSpider ready');
+
+                //rollingSpider.on('battery', function () {
+                //    console.log('Battery: ' + rollingSpider.status.battery + '%');
+                //    rollingSpider.signalStrength(function (err, val) {
+                //        console.log('Signal: ' + val + 'dBm');
+                //    });
+                //});
             });
         });
 
         return rollingSpider;
     },
 
-    setRollingSpider : function(type){
+    setRollingSpider : function(type, myoSteps){
+
+        var steps = (typeof myoSteps === 'undefined') ? defaultSteps : myoSteps;
+
         if (!isReady) {
             console.log('rollingSpider is not ready!');
             return;
@@ -41,16 +52,28 @@ module.exports = {
 
             switch (type) {
                 case 'up':
-                    rollingSpider.up({ steps: 2});
+                    rollingSpider.up({ steps: steps});
                     break;
                 case 'down':
-                    rollingSpider.down({ steps: 2});
+                    rollingSpider.down({ steps: steps});
+                    break;
+                case 'left':
+                    rollingSpider.left({ steps: steps});
+                    break;
+                case 'right':
+                    rollingSpider.right({ steps: steps});
+                    break;
+                case 'forward':
+                    rollingSpider.forward({ steps: steps});
+                    break;
+                case 'backward':
+                    rollingSpider.backward({ steps: steps});
                     break;
                 case 'tiltLeft':
-                    rollingSpider.tiltLeft({ steps: 2});
+                    rollingSpider.tiltLeft({ steps: steps});
                     break;
                 case 'tiltRight':
-                    rollingSpider.tiltRight({ steps: 2});
+                    rollingSpider.tiltRight({ steps: steps});
                     break;
                 case 'land':
                     rollingSpider.land();

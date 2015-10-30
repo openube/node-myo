@@ -22,12 +22,20 @@ module.exports = {
                     break;
 
                 case 'up':
+                    drone.setRollingSpider('forward');
+                    console.log('Forward');
                     break;
                 case 'down':
+                    drone.setRollingSpider('backward');
+                    console.log('Backward');
                     break;
                 case 'left':
+                    drone.setRollingSpider('left');
+                    console.log('Left');
                     break;
                 case 'right':
+                    drone.setRollingSpider('right');
+                    console.log('Right');
                     break;
 
                 case 'space':
