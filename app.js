@@ -8,7 +8,7 @@ var pebble          = require('./components/pebble'),
     myMyo,
     myTunnel;
 
-myTunnel = localtunnel(port, 'whitemanjuu');
+myTunnel = localtunnel(port, 'somesubdomainabc123');
 myDrone = drone.connect();
 myMyo = myo.connect(myDrone);
 pebble.setServer(port,myDrone);
