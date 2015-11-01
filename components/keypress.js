@@ -1,4 +1,4 @@
-var keypress        = require('keypress');
+var keypress = require('keypress');
 
 module.exports = {
     setListeners : function(drone,myo,tunnel){
