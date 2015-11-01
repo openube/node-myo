@@ -99,6 +99,4 @@ module.exports = {
     toggleLocked: function(bool){
         isLocked = (typeof bool === 'undefined') ? !isLocked : bool;
     }
-
-
 };
