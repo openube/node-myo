@@ -2,6 +2,18 @@
 
 This is a prototype app that controls the Parrot Rolling Spider with MyoJS and PebbleJS
 
+##Acknowledgments
+Without the open source projects and guidance from [Chris Willians](https://github.com/voodootikigod/node-rolling-spider) and [Sandeep Mistry](https://github.com/sandeepmistry/noble), this project would not have lifted from the ground (literally).
+
+
+##Quick run down
+This Nodejs app:
+
+- Creates a server and listens for AJAX calls from Pebble.
+- Detects keypresses in terminal and controls the drone.
+- Connects to Myo and allow dron control.
+- Uses socket.io by the client UI to interact with the drone.
+
 ##Instructions
 
 ###Prerequisites
@@ -13,13 +25,13 @@ This is a prototype app that controls the Parrot Rolling Spider with MyoJS and P
 
 ###Running the PebbleJS app
 
-Build ```pebblejs.js``` as an app in [cloudpebble.net](http://cloudpebble.net) and push to your mobile
+Build ```pebbleapp/pebblejs.js```as an app in [cloudpebble.net](http://cloudpebble.net) and push to your mobile
 
 
 ###Running the Node app
 
 ```
-npm install
+cd app && npm install
 ```
 
 ```
@@ -27,6 +39,10 @@ node app.js
 ```
 
  Note: Make sure bluetooth is turned on.
+
+### Drone discovery
+
+To discover the ID and name of a certain drone, use ```app/lib/discovery.js```
 
 ##Controls
 
