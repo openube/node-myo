@@ -7,11 +7,14 @@ var server          = require('./components/server'),
     socketio        = require('./components/socketio'),
 
     port            = 1337,
+    appPath         = __dirname,
     pebbleUrl       = '/pebblecall',
-    myTunnel        = localtunnel(port, 'somesubdomainabc123'),
-    myDrone         = drone.connect(),
-    myMyo           = myo.connect(myDrone),
-    myApp           = server.setServer(port);
 
-keypress.setListeners(myDrone,myMyo, myTunnel);
-pebble.setAjaxCall(myApp.app, myDrone, pebbleUrl);
+    //myTunnel        = localtunnel(port, 'somesubdomain123'),
+    //myDrone         = drone.connect(),
+    //myMyo           = myo.connect(myDrone),
+    myApp           = server.setServer(port,appPath);
+
+//keypress.setListeners(myDrone,myMyo, myTunnel);
+//pebble.setAjaxCall(myApp.app, myDrone, pebbleUrl);
+socketio.connect(myApp.server);
