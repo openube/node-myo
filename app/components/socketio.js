@@ -1,25 +1,26 @@
-var socketio = require('socket.io'),
-    io;
+var socketio    = require('socket.io');
 
-module.exports = {
-    connect : function(server){
-        io  = socketio.listen(server);
+module.exports = function(server){
 
-        io.on('connection', function(socket){
-            console.log('Connection started');
+    var io  = socketio.listen(server);
 
-            socket.on('success', function(data) {
-                console.log(data);
-            });
+    io.on('connection', function(socket){
+        console.log('Connection started');
 
-            //drone calls
-
-            //
-
+        socket.on('success', function(data) {
+            console.log(data);
         });
-    },
 
-    socketEmit : function(call,data){
-        io.emit(call,data);
-    }
+        io.on('keypress', function(data){
+            if (typeof data === 'undefined') return;
+            switch(data.key){
+                case 't':
+                    console.log('Received keypress from socket listener');
+                    break;
+            }
+        });
+
+    });
+
+    return io;
 };

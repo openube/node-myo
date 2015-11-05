@@ -5,9 +5,6 @@ var bodyParser      = require('body-parser'),
     http            = require('http'),
     app             = express(),
     server          = http.Server(app),
-
-
-    io              = require('socket.io').listen(server),
     viewsPath;
 
 module.exports = {
@@ -20,7 +17,6 @@ module.exports = {
         app.use('/static', express.static(url + '/public'));
         app.use(
             sassMiddleware({
-                /* Options */
                 src: path.join(url, '/src/scss'),
                 dest: path.join(url, '/public/css/'),
                 debug: true,
@@ -29,6 +25,7 @@ module.exports = {
         );
 
         app.set('view engine', 'jade');
+        app.set('view options', { layout: true });
         app.set('views', viewsPath);
 
         app.use(function(req, res, next) {
@@ -49,15 +46,6 @@ module.exports = {
         //});
 
         server.listen(port);
-
-        io.on('connection', function(socket){
-            console.log('Connection started');
-
-            socket.on('success', function(data) {
-                console.log(data);
-            });
-
-        });
 
         return {
             'app':app,
