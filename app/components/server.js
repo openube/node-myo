@@ -3,53 +3,56 @@ var bodyParser      = require('body-parser'),
     sassMiddleware  = require('node-sass-middleware'),
     express         = require('express'),
     http            = require('http'),
+    pebble          = require('./pebble'),
     app             = express(),
     server          = http.Server(app),
     viewsPath;
 
-module.exports = {
-    setServer : function(port,url){
+module.exports = function(settings){
+    viewsPath   = path.join(settings.config.appPath, '/views');
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({extended: true}));
+    app.use('/static', express.static(settings.config.appPath + '/public'));
+    app.use(
+        sassMiddleware({
+            src: path.join(settings.config.appPath, '/src/scss'),
+            dest: path.join(settings.config.appPath, '/public/css/'),
+            debug: true,
+            outputStyle: 'expanded'
+        })
+    );
 
-        viewsPath   = path.join(url, '/views');
+    app.set('view engine', 'jade');
+    app.set('view options', { layout: true });
+    app.set('views', viewsPath);
 
-        app.use(bodyParser.json());
-        app.use(bodyParser.urlencoded({extended: true}));
-        app.use('/static', express.static(url + '/public'));
-        app.use(
-            sassMiddleware({
-                src: path.join(url, '/src/scss'),
-                dest: path.join(url, '/public/css/'),
-                debug: true,
-                outputStyle: 'expanded'
-            })
-        );
+    app.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
 
-        app.set('view engine', 'jade');
-        app.set('view options', { layout: true });
-        app.set('views', viewsPath);
+    app.get('/', function (req, res) {
+        res.render('index',
+            { title : 'Node-myo UI' }
+        )
+    });
 
-        app.use(function(req, res, next) {
-            res.header("Access-Control-Allow-Origin", "*");
-            res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-            res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-            next();
-        });
+    //app.listen(port, function () {
+    //    console.log('Running server at port %s', port);
+    //});
 
-        app.get('/', function (req, res) {
-            res.render('index',
-                { title : 'Node-myo UI' }
-            )
-        });
+    server.listen(settings.config.port,function(){
+        console.log('Server is listening');
+    });
 
-        //app.listen(port, function () {
-        //    console.log('Running server at port %s', port);
-        //});
+    settings.module.express.app = app;
+    settings.module.express.server = server;
 
-        server.listen(port);
+    return {
+        'app':app,
+        'server':server
+    };
 
-        return {
-            'app':app,
-            'server':server
-        };
-    }
 };

@@ -2,11 +2,14 @@ var RollingSpider   = require('rolling-spider'),
     isReady         = false,
     hasTakeoff      = false,
     defaultSteps    = 2,
-    rollingSpider   = new RollingSpider();
+    settings;
 
 module.exports = {
 
-    connect : function(){
+    connect : function(_settings){
+        var rollingSpider   = new RollingSpider();
+
+        settings = _settings;
 
         rollingSpider.connect(function() {
             console.log('rollingSpider connect');
@@ -23,6 +26,7 @@ module.exports = {
                 //        console.log('Signal: ' + val + 'dBm');
                 //    });
                 //});
+
             });
         });
 
@@ -31,7 +35,8 @@ module.exports = {
 
     setRollingSpider : function(type, myoSteps){
 
-        var steps = (typeof myoSteps === 'undefined') ? defaultSteps : myoSteps;
+        var steps = (typeof myoSteps === 'undefined') ? defaultSteps : myoSteps,
+            rollingSpider   = settings.module.drone;
 
         if (!isReady) {
             console.log('rollingSpider is not ready!');
@@ -101,13 +106,5 @@ module.exports = {
 
             }
         }
-    },
-
-    getIsReady: function(){
-        return isReady;
-    },
-
-    getHasTakeoff: function(){
-        return hasTakeoff;
     }
 };

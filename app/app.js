@@ -1,24 +1,19 @@
-var server          = require('./components/server'),
+var
+    settings        = require('./components/settings'),
+    //localtunnel     = require('./components/localtunnel')(settings.port, 'somesubdomain123'),
+    server          = require('./components/server')(settings),
     pebble          = require('./components/pebble'),
-    localtunnel     = require('./components/localtunnel'),
+
     myo             = require('./components/myo'),
     drone           = require('./components/drone'),
     keypress        = require('./components/keypress'),
-    socketio        = require('./components/socketio'),
+    socketio        = require('./components/socketio')(settings);
 
-    port            = 1337,
-    appPath         = __dirname,
-    pebbleUrl       = '/pebblecall',
+    //myDrone         = drone.connect(settings),
+    //myMyo           = myo.connect(myDrone),
+    //mySocketIO      = socketio(settings);
 
 
-
-    myTunnel        = localtunnel(port, 'somesubdomain123'),
-
-    myDrone         = drone.connect(),
-    myMyo           = myo.connect(myDrone),
-    myApp           = server.setServer(port,appPath);
-    //mySocketIO      = socketio(myApp.server);
-
-keypress.setListeners(myDrone,myMyo, myTunnel);
-pebble.setAjaxCall(myApp.app, myDrone, pebbleUrl);
+keypress.setListeners(settings);
+//pebble.setAjaxCall(server.app, myDrone, pebbleUrl);
 

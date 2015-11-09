@@ -1,24 +1,17 @@
 var socketio    = require('socket.io');
 
-module.exports = function(server){
+module.exports = function(settings){
 
-    var io  = socketio.listen(server);
+    var io  = socketio.listen(settings.module.express.server);
 
     io.on('connection', function(socket){
-        console.log('Connection started');
+        console.log('Socketio started');
 
         socket.on('success', function(data) {
             console.log(data);
         });
 
-        io.on('keypress', function(data){
-            if (typeof data === 'undefined') return;
-            switch(data.key){
-                case 't':
-                    console.log('Received keypress from socket listener');
-                    break;
-            }
-        });
+        settings.module.socketio = io;
 
     });
 
