@@ -20,7 +20,8 @@ module.exports = function(settings){
             //root: settings.config.appPath,
             debug: true,
             force: true,
-            outputStyle: 'expanded'
+            outputStyle: 'expanded',
+            prefix: '/static/css'
         })
     );
     app.use('/static', express.static(settings.config.appPath + '/public'));
