@@ -6,8 +6,8 @@ var
 
     myo             = require('./components/myo'),
     drone           = require('./components/drone'),
-    keypress        = require('./components/keypress'),
-    socketio        = require('./components/socketio')(settings);
+    keypress        = require('./components/keypress');
+    //socketio        = require('./components/socketio')(settings);
 
     //myDrone         = drone.connect(settings),
     //myMyo           = myo.connect(myDrone),

@@ -1,5 +1,5 @@
 var path        = require('path'),
-    appPath     = path.join(__dirname, '..');
+    appPath     = path.join(__dirname, '../');
 
 var settings = {
     config:{

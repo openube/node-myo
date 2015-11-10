@@ -3,7 +3,6 @@ var bodyParser      = require('body-parser'),
     sassMiddleware  = require('node-sass-middleware'),
     express         = require('express'),
     http            = require('http'),
-    pebble          = require('./pebble'),
     app             = express(),
     server          = http.Server(app),
     viewsPath;
@@ -12,16 +11,19 @@ module.exports = function(settings){
     viewsPath   = path.join(settings.config.appPath, '/views');
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
-    app.use('/static', express.static(settings.config.appPath + '/public'));
     app.use(
         sassMiddleware({
-            src: path.join(settings.config.appPath, '/src/scss'),
+            src: path.join(settings.config.appPath, '/src/scss/'),
             dest: path.join(settings.config.appPath, '/public/css/'),
+            //src: '/src/scss/',
+            //dest: '/public/css/',
+            //root: settings.config.appPath,
             debug: true,
+            force: true,
             outputStyle: 'expanded'
         })
     );
-
+    app.use('/static', express.static(settings.config.appPath + '/public'));
     app.set('view engine', 'jade');
     app.set('view options', { layout: true });
     app.set('views', viewsPath);
@@ -42,6 +44,8 @@ module.exports = function(settings){
     //app.listen(port, function () {
     //    console.log('Running server at port %s', port);
     //});
+
+    app.listen();
 
     server.listen(settings.config.port,function(){
         console.log('Server is listening');
