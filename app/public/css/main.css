@@ -1,10 +1,16 @@
 @import url("https://fonts.googleapis.com/css?family=Arimo:400,700");
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Arimo', 'Avenir Next','Verdana', 'Arial', sans-serif;
   font-size: 16px;
   line-height: 1.4;
   font-weight: 400;
   color: #222222;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -12,9 +18,107 @@ h1 {
 }
 
 .header {
-  padding: 1em;
+  border: 1px solid blue;
+}
+
+.footer {
+  border: 1px solid blue;
 }
 
 .main {
   position: relative;
+  padding: 1em;
+}
+
+.main:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.container__visual {
+  float: left;
+  width: 60%;
+  position: relative;
+  min-height: 300px;
+}
+
+.container__info {
+  float: left;
+  width: 40%;
+}
+
+.visual__container {
+  transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.visual__drone {
+  transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  position: relative;
+  width: 278px;
+  height: 78px;
+  transform: translateY(0);
+}
+
+.visual__drone:before, .visual__drone:after {
+  transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 50%;
+  height: 1px;
+  top: 80%;
+  max-width: 200px;
+  background: transparent;
+  box-shadow: 0 80px 20px #777;
+  transform: rotate(-8deg);
+}
+
+.visual__drone:after {
+  transform: rotate(8deg);
+  right: 10px;
+  left: auto;
+}
+
+.visual__drone.takeoff {
+  transform: translateY(-50%);
+}
+
+.visual__drone.takeoff:before, .visual__drone.takeoff:after {
+  top: 60%;
+  box-shadow: 0 130px 20px #777;
+}
+
+.visual__drone.land {
+  transform: translateY(75%);
+}
+
+.visual__drone.land:before, .visual__drone.land:after {
+  top: 60%;
+  box-shadow: 0 35px 15px #000;
+}
+
+.visual__drone.forward {
+  transform: translateY(-50%) scale(1.2);
+}
+
+.visual__drone.backward {
+  transform: translateY(-50%) scale(0.8);
+}
+
+.visual__drone.left {
+  transform: translateY(-50%) rotate(10deg);
+}
+
+.visual__drone img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
 }

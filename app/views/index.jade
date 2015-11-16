@@ -2,14 +2,22 @@ extend _layout
 
 block content
     .container__visual
-        .visual__drone
-            | visual drone
+        .visual__container
+            #drone.visual__drone.land
+                img(src="/static/images/drone.png" alt="drone")
     .container__info
         .info__details
-            | details
+            #accelerometer
         .info__console
-            | console
-    .container__actions
-        ul.actions__list
-            li.actions__take-off take off
-            li.actions__land land
+            #console
+    //.container__actions
+    //    ul.actions__list
+    //        li.actions__takeoff take off
+    //        li.actions__land land
+    //        li.actions__up up
+    //        li.actions__down down
+    //        li.actions__right right
+    //        li.actions__left left
+    //        li.actions__forward right
+    //        li.actions__backward left
+    //        li.actions__flip flip
