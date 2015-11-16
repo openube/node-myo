@@ -1,31 +1,18 @@
 var keypress = require('keypress');
 
-var setListeners = function(settings){
-    var drone       = settings.module.drone,
-        myo         = settings.module.myo,
-        tunnel      = settings.module.localtunnel,
+var setListeners = function(drone,myo,settings){
+    var tunnel      = settings.module.localtunnel,
         socketio    = settings.module.socketio;
 
     keypress(process.stdin);
     process.stdin.resume();
     process.stdin.setEncoding('utf8');
     process.stdin.setRawMode(true);
-
     process.stdin.on('keypress', function (ch, key) {
 
         if (!key) return;
         console.log('Pressed =', key.name);
         switch (key.name) {
-            case 't' :
-                //test key
-                if (!socket){
-                    socketio = settings.module.socketio;
-                }
-
-                socketio.emit('website', {'key': key.name});
-
-                break;
-
             case 'q':
             case 'escape':
                 console.log('Exit');

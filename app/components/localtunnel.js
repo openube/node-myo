@@ -3,16 +3,18 @@ var localtunnel = require('localtunnel'),
                     subdomain: 'somesubdomainabc123'
                 };
 
-module.exports = function(port, subdomain){
+module.exports = function(settings, callback){
     opts        = {
-        'subdomain': subdomain
+        'subdomain': settings.config.subDomain
     };
 
-    var tunnel  = localtunnel(port, opts ,function(err, tunnel) {
+    var tunnel  = localtunnel(settings.config.port, opts ,function(err, tunnel) {
         if (err){
             console.log(err);
         }
         console.log('Running localtunnel',tunnel.url);
+        settings.module.localtunnel = tunnel;
+        callback(null, tunnel);
     });
 
     tunnel.on('close', function() {

@@ -1,6 +1,7 @@
 var socketio    = require('socket.io');
 
-module.exports = function(settings){
+
+module.exports = function(settings,callback){
 
     var io  = socketio.listen(settings.module.express.server);
 
@@ -8,12 +9,15 @@ module.exports = function(settings){
         console.log('Socketio started');
 
         socket.on('success', function(data) {
-            console.log(data);
+            console.log('Connection success');
         });
 
-        settings.module.socketio = io;
+        socket.on('keypress', function(data) {
+            console.log('Socket received keypress');
+        });
 
     });
 
+    callback(null, io);
     return io;
 };

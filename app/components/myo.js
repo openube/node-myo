@@ -10,16 +10,10 @@ var Myo             = require('myo'),
 
 module.exports = {
 
-    connect: function(drone){
+    connect: function(drone,settings){
 
         Myo.connect();
-        module.exports.setListeners();
 
-        return Myo;
-
-    },
-
-    setListeners : function(){
         Myo.on('connected',function(){
             console.log('Myo connected. ID:', this.name);
             console.log('----------------------------');
@@ -82,6 +76,10 @@ module.exports = {
             }
 
         });
+
+
+        return Myo;
+
     },
 
     getAccelerometer : function(){

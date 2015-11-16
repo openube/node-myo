@@ -1,5 +1,8 @@
 module.exports = {
-  setAjaxCall: function(app,drone,url){
+  setAjaxCall: function(app,drone,settings){
+      var url   = settings.config.pebbleUrl,
+          io    = settings.module.socketio;
+
       app.post(url, function (req, res) {
           var a = req.body,
               response = {};
@@ -7,6 +10,10 @@ module.exports = {
           switch (a.type) {
               case 'ping':
                   console.log('Got a ping from pebble');
+                  //io.emit('web',{
+                  //    'type': ,
+                  //    'data': ''
+                  //});
                   response.text = 'Success';
                   response.type = a.type;
                   break;

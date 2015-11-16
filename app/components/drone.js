@@ -1,14 +1,15 @@
 var RollingSpider   = require('rolling-spider'),
     isReady         = false,
     hasTakeoff      = false,
-    defaultSteps    = 2,
+    defaultSteps    = 8,
     settings;
 
 module.exports = {
 
-    connect : function(_settings){
+    connect : function(_settings, callback){
         var rollingSpider   = new RollingSpider();
 
+        //just for namespace
         settings = _settings;
 
         rollingSpider.connect(function() {
@@ -29,7 +30,8 @@ module.exports = {
 
             });
         });
-
+        settings.module.drone = rollingSpider;
+        callback(null);
         return rollingSpider;
     },
 

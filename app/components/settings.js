@@ -5,7 +5,8 @@ var settings = {
     config:{
         'port':  1337,
         'appPath': appPath,
-        'pebbleUrl': '/pebblecall'
+        'pebbleUrl': '/pebblecall',
+        'subDomain': 'hahahaha'
     },
     module:{
         'express': {
@@ -16,6 +17,19 @@ var settings = {
         'myo'   : null,
         'socketio' : null,
         'localtunnel': null
+    },
+    notification: {
+        'pebble':{
+        },
+        'drone':{
+
+        },
+        'myo':{
+
+        },
+        'server':{
+
+        }
     }
 };
 
