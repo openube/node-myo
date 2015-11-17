@@ -1,9 +1,41 @@
 .info{
   @include element(details){
-
+    @include clearfix();
   }
 
-  @include element(console){
+  @include element(column){
+    float:left;
+    width:33.33333333%;
+  }
 
+  @include element(block){
+    padding:1em;
+  }
+
+  @include element(list){
+    @include clearfix();
+    list-style: none;
+    margin:0;
+    padding:0;
+    text-align: center;
+
+    li{
+      display:inline-block;
+    }
+    span{
+      padding:4px;
+      display:inline-block;
+    }
+  }
+
+  @include element(item){
+    display:block;
+    &:first-of-type{
+      font-weight:700;
+    }
+  }
+
+  @include element(items){
+    display:block;
   }
 }

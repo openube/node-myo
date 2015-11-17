@@ -7,27 +7,30 @@ block content
                 img(src="/static/images/drone.png" alt="drone")
     .container__info
         .info__details
-            #orientation.info__block
-                p Orientation
-                ul.info__list
-                    li(data-type="w")
-                    li(data-type="x")
-                    li(data-type="y")
-                    li(data-type="z")
-            #gyroscope.info__block
-                p Gyroscope
-                ul.info__list
-                    li(data-type="x")
-                    li(data-type="y")
-                    li(data-type="z")
-            #accelerometer.info__block
-                p Accelerometer
-                ul.info__list
-                    li(data-type="x")
-                    li(data-type="y")
-                    li(data-type="z")
+            #orientation.info__column
+                .info__block
+                    p Orientation
+                    ul.info__list
+                        li(data-type="w")
+                        li(data-type="x")
+                        li(data-type="y")
+                        li(data-type="z")
+            #gyroscope.info__column
+                .info__block
+                    p Gyroscope
+                    ul.info__list
+                        li(data-type="x")
+                        li(data-type="y")
+                        li(data-type="z")
+            #accelerometer.info__column
+                .info__block
+                    p Accelerometer
+                    ul.info__list
+                        li(data-type="x")
+                        li(data-type="y")
+                        li(data-type="z")
         .info__console
-            #console.info__list
+            #console.info__items
     //.container__status
     //    ul.status__list
     //        li.status__drone Drone

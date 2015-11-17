@@ -7,7 +7,7 @@ $(function() {
 
 
     socket.on('connect', function(data) {
-        console.log('connected');
+        console.log('Socketio: connected');
         socket.emit('success', 'Success');
     });
 
@@ -42,11 +42,6 @@ function updateDrone(raw){
     } else{
         $('#drone').attr('class', 'visual__drone land');
     }
-
-
-
-
-
 }
 
 function updateConsoleDetails(raw){
@@ -60,7 +55,7 @@ function updateConsoleDetails(raw){
     for (var i=arr.length - 1; i >=  0; i--){
         $('#console').append(
             $('<span>')
-                .addClass('console__item')
+                .addClass('info__item')
                 .html(arr[i])
         );
     }
