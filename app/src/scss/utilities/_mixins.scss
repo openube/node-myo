@@ -17,3 +17,25 @@
       clear: both;
   }
 }
+
+$screen-sm: 480px;
+$screen-md: 768px;
+$screen-lg: 1024px;
+
+@mixin media-query($media-query, $max: false){
+  $minMax: "min";
+  @if $max {
+    $minMax: "max";
+  }
+  @if $media-query == lg{
+    @media only screen and (#{$minMax}-width: #{$screen-lg - 1}) { @content; }
+  }
+
+  @if $media-query == md{
+    @media only screen and (#{$minMax}-width: #{$screen-md - 1}) { @content; }
+  }
+
+  @if $media-query == sm{
+    @media only screen and (#{$minMax}-width: #{$screen-sm - 1}) { @content; }
+  }
+}

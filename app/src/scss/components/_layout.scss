@@ -1,9 +1,7 @@
 .header{
-  border:1px solid blue;
 }
 
 .footer{
-  border:1px solid blue;
 }
 
 .main{
@@ -15,108 +13,12 @@
 
 .container{
   @include element(visual){
-    float:left;
-    width:60%;
+
     position:relative;
     min-height:300px;
   }
   @include element(info){
-    float:left;
-    width:40%;
-  }
-}
-
-.visual{
-  @include element(container){
-    transition: all 0.3s cubic-bezier(.17,.67,.83,.67);
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-  }
-  @include element(drone){
-    transition: all 0.3s cubic-bezier(.17,.67,.83,.67);
-    position:relative;
-    width:278px;
-    height:78px;
-    transform:translateY(0);
-    &:before,
-    &:after{
-      transition: all 0.3s cubic-bezier(.17,.67,.83,.67);
-      z-index: -1;
-      position: absolute;
-      content: "";
-      bottom: 25px;
-      left: 10px;
-      width: 50%;
-      height:1px;
-      top: 80%;
-      max-width:200px;
-      background: transparent;
-      box-shadow: 0 80px 20px #777;
-      transform: rotate(-8deg);
-    }
-    &:after{
-      transform: rotate(8deg);
-      right: 10px;
-      left: auto;
-    }
-
-    &.takeoff{
-      transform:translateY(-25%);
-      &:before,
-      &:after {;
-        box-shadow: 0 80px 20px #777;
-      }
-    }
-
-    &.up{
-      transform:translateY(-50%);
-      &:before,
-      &:after {
-        top: 60%;
-        box-shadow: 0 130px 20px #777;
-      }
-    }
-
-    &.down{
-      transform:translateY(0);
-      &:before,
-      &:after {
-        top: 60%;
-        box-shadow: 0 130px 20px #777;
-      }
-    }
-    &.land{
-      transform:translateY(75%);
-      &:before,
-      &:after {
-        top: 60%;
-        box-shadow: 0 35px 15px #000;
-      }
-    }
-
-    &.forward{
-      transform:translateY(-25%) scale(1.2);
-    }
-
-    &.backward{
-      transform:translateY(-25%) scale(0.8);
-    }
-
-    &.left{
-      transform:translate(-10%,-25%) rotate(-10deg);
-    }
-
-    &.right{
-      transform:translate(10%,-25%) rotate(10deg);
-    }
-
-    img{
-      width:100%;
-      height:auto;
-      max-width:100%;
-      display: block;
-    }
+    border:1px solid lightblue;
+    padding:1em;
   }
 }

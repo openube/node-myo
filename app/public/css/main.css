@@ -15,14 +15,7 @@ body {
 
 h1 {
   margin: 0;
-}
-
-.header {
-  border: 1px solid blue;
-}
-
-.footer {
-  border: 1px solid blue;
+  font-size: 1.5rem;
 }
 
 .main {
@@ -37,15 +30,13 @@ h1 {
 }
 
 .container__visual {
-  float: left;
-  width: 60%;
   position: relative;
   min-height: 300px;
 }
 
 .container__info {
-  float: left;
-  width: 40%;
+  border: 1px solid lightblue;
+  padding: 1em;
 }
 
 .visual__container {
@@ -87,10 +78,27 @@ h1 {
 }
 
 .visual__drone.takeoff {
-  transform: translateY(-50%);
+  transform: translateY(-25%);
 }
 
 .visual__drone.takeoff:before, .visual__drone.takeoff:after {
+  box-shadow: 0 80px 20px #777;
+}
+
+.visual__drone.up {
+  transform: translateY(-50%);
+}
+
+.visual__drone.up:before, .visual__drone.up:after {
+  top: 60%;
+  box-shadow: 0 130px 20px #777;
+}
+
+.visual__drone.down {
+  transform: translateY(0);
+}
+
+.visual__drone.down:before, .visual__drone.down:after {
   top: 60%;
   box-shadow: 0 130px 20px #777;
 }
@@ -105,15 +113,19 @@ h1 {
 }
 
 .visual__drone.forward {
-  transform: translateY(-50%) scale(1.2);
+  transform: translateY(-25%) scale(1.2);
 }
 
 .visual__drone.backward {
-  transform: translateY(-50%) scale(0.8);
+  transform: translateY(-25%) scale(0.8);
 }
 
-.visual__drone.left {
-  transform: translateY(-50%) rotate(10deg);
+.visual__drone.tiltLeft {
+  transform: translate(-10%, -25%) rotate(-10deg);
+}
+
+.visual__drone.tiltRight {
+  transform: translate(10%, -25%) rotate(10deg);
 }
 
 .visual__drone img {

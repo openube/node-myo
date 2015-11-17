@@ -7,17 +7,44 @@ block content
                 img(src="/static/images/drone.png" alt="drone")
     .container__info
         .info__details
-            #accelerometer
+            #orientation.info__block
+                p Orientation
+                ul.info__list
+                    li(data-type="w")
+                    li(data-type="x")
+                    li(data-type="y")
+                    li(data-type="z")
+            #gyroscope.info__block
+                p Gyroscope
+                ul.info__list
+                    li(data-type="x")
+                    li(data-type="y")
+                    li(data-type="z")
+            #accelerometer.info__block
+                p Accelerometer
+                ul.info__list
+                    li(data-type="x")
+                    li(data-type="y")
+                    li(data-type="z")
         .info__console
-            #console
+            #console.info__list
+    //.container__status
+    //    ul.status__list
+    //        li.status__drone Drone
+    //        li.status__tunnel Local Tunnel
+    //        li.status__myo Myo
+    //        li.status__pebble Pebble
+    //        li.status__togglelock Locked
+    //        li.status__calibrate Calibration
+    //
     //.container__actions
-    //    ul.actions__list
-    //        li.actions__takeoff take off
-    //        li.actions__land land
-    //        li.actions__up up
-    //        li.actions__down down
-    //        li.actions__right right
-    //        li.actions__left left
-    //        li.actions__forward right
-    //        li.actions__backward left
-    //        li.actions__flip flip
+        //ul.actions__list
+        //    li.actions__takeoff take off
+        //    li.actions__land land
+        //    li.actions__up up
+        //    li.actions__down down
+        //    li.actions__right right
+        //    li.actions__left left
+        //    li.actions__forward right
+        //    li.actions__backward left
+        //    li.actions__flip flip
