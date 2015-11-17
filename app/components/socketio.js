@@ -1,6 +1,7 @@
 var socketio    = require('socket.io'),
     clc         = require('cli-color');
 
+//TODO: Need to stop multiple instance callbacks
 
 module.exports = function(settings,callback){
 
@@ -12,10 +13,12 @@ module.exports = function(settings,callback){
         socket.on('success', function(data) {
             console.log(clc.green('Socketio: Connection success'));
             socket.emit('console', {'data': 'Socketio: Connection success'})
-            settings.module.socketio = io;
-        });
 
+            settings.module.socketio = io;
+
+        });
     });
     callback(null, io);
+
     return io;
 };
