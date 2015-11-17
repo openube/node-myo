@@ -48,13 +48,13 @@ module.exports = {
         Myo.on('fist', function(myo, data){
             isLocked = true;
             console.log(clc.red('Myo: isLocked = ',isLocked));
-            socketio.emit('console', {'data':'Myo: Locked'});
+            socketio.emit('console', {'data':'Myo: isLocked = ' + isLocked});
         });
 
         Myo.on('fingers_spread', function(myo, data){
             isLocked = false;
             console.log(clc.green('Myo: isLocked = ',isLocked));
-            socketio.emit('console', {'data':'Myo: Unlocked'});
+            socketio.emit('console', {'data':'Myo: isLocked = ' + isLocked});
         });
 
         Myo.on('imu', function(raw){
