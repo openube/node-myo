@@ -1,4 +1,5 @@
-var keypress = require('keypress');
+var keypress    = require('keypress'),
+    clc         = require('cli-color');
 
 var setListeners = function(drone,myo,settings){
     var tunnel      = settings.module.localtunnel,
@@ -11,11 +12,12 @@ var setListeners = function(drone,myo,settings){
     process.stdin.on('keypress', function (ch, key) {
 
         if (!key) return;
-        console.log('Pressed =', key.name);
+        if (!socketio) socketio = settings.module.socketio;
+        console.log('Key pressed =', key.name);
         switch (key.name) {
             case 'q':
             case 'escape':
-                console.log('Exit');
+                console.log(clc.red('Key: Exit'));
                 if (tunnel) tunnel.close();
                 process.stdin.pause();
                 process.exit();
@@ -23,49 +25,50 @@ var setListeners = function(drone,myo,settings){
 
             case 'up':
                 drone.setRollingSpider('forward');
-                console.log('Forward');
+                console.log('Key: Forward');
                 break;
             case 'down':
                 drone.setRollingSpider('backward');
-                console.log('Backward');
+                console.log('Key: Backward');
                 break;
             case 'left':
                 drone.setRollingSpider('left');
-                console.log('Left');
+                console.log('Key: Left');
                 break;
             case 'right':
                 drone.setRollingSpider('right');
-                console.log('Right');
+                console.log('Key: Right');
                 break;
 
             case 'space':
                 drone.setRollingSpider('takeoff');
-                console.log('Take off');
+                console.log('Key: Take off');
                 break;
 
             case 'a':
                 myo.setAccelerometer();
-                console.log('Calibrated = ', myo.getAccelerometer());
+                console.log('Key: Calibrated = ', myo.getAccelerometer());
+                socketio.emit('console',{'data':myo.getAccelerometer()});
                 break;
 
             case 'x':
                 myo.toggleLocked();
-                console.log('isLocked = ', myo.getLocked());
+                console.log('Key: isLocked = ', myo.getLocked());
                 break;
 
             case 'z' :
                 drone.setRollingSpider('land');
-                console.log('Land');
+                console.log('Key: Land');
                 break;
 
             case 'm':
                 drone.setRollingSpider('emergency');
-                console.log('Emergency');
+                console.log(clc.red('Key: Emergency'));
                 break;
         }
 
         if (key && key.ctrl && key.name == 'c') {
-            console.log('Exit');
+            console.log(clc.red('Key: Exit'));
             if (tunnel) tunnel.close();
             process.stdin.pause();
             process.exit();

@@ -1,4 +1,4 @@
-var allowTunnel     = true,
+var allowTunnel     = false,
     async           = require('async'),
     settings        = require('./components/settings'),
     localtunnel     = require('./components/localtunnel'),
@@ -14,16 +14,16 @@ var allowTunnel     = true,
     mySocketIO,
     myLocalTunnel;
 
-
 async.waterfall([
     function(callback) {
         mySocketIO  = socketio(settings, callback);
     },
     function(io, callback) {
+        settings.module.socketio = io;
         if (allowTunnel){
             myLocalTunnel = localtunnel(settings,callback);
         }else{
-            console.log('Skip tunnel');
+            console.log('Async: allowTunnel is', allowTunnel);
             callback(null, null);
         }
     },
@@ -34,10 +34,9 @@ async.waterfall([
         keypress.setListeners(drone,myo,settings);
         pebble.setAjaxCall(server.app, drone, settings);
 
-    }],function(err,result){
-    //When everything is done return back to caller.
-    //callback();
-    console.log(err);
+    }],
+    function(err,result){
+
 });
 
 

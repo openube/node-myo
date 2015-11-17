@@ -1,4 +1,5 @@
-var bodyParser      = require('body-parser'),
+var clc             = require('cli-color'),
+    bodyParser      = require('body-parser'),
     path            = require('path'),
     sassMiddleware  = require('node-sass-middleware'),
     express         = require('express'),
@@ -49,7 +50,7 @@ module.exports = function(settings){
     app.listen();
 
     server.listen(settings.config.port,function(){
-        console.log('Server is listening');
+        console.log(clc.blue('Server: Server is listening'));
     });
 
     settings.module.express.app = app;

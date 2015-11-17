@@ -1,4 +1,5 @@
-var socketio    = require('socket.io');
+var socketio    = require('socket.io'),
+    clc         = require('cli-color');
 
 
 module.exports = function(settings,callback){
@@ -6,18 +7,15 @@ module.exports = function(settings,callback){
     var io  = socketio.listen(settings.module.express.server);
 
     io.on('connection', function(socket){
-        console.log('Socketio started');
+        console.log(clc.blue('Socketio: Started'));
 
         socket.on('success', function(data) {
-            console.log('Connection success');
-        });
-
-        socket.on('keypress', function(data) {
-            console.log('Socket received keypress');
+            console.log(clc.green('Socketio: Connection success'));
+            socket.emit('console', {'data': 'Socketio: Connection success'})
+            settings.module.socketio = io;
         });
 
     });
-
     callback(null, io);
     return io;
 };

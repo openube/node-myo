@@ -9,13 +9,14 @@ module.exports = {
 
           switch (a.type) {
               case 'ping':
-                  console.log('Got a ping from pebble');
+                  console.log('Pebble: Got a ping from pebble');
                   //io.emit('web',{
                   //    'type': ,
                   //    'data': ''
                   //});
                   response.text = 'Success';
                   response.type = a.type;
+                  io.emit('console',{'data': 'Pebble: Received a ping'});
                   break;
               case 'takeoff':
               case 'land':
@@ -26,6 +27,8 @@ module.exports = {
               case 'flipright':
                   drone.setRollingSpider(a.type);
                   response.type = a.type;
+                  console.log('Pebble: Received', a.type);
+                  io.emit('console',{'data': 'Pebble: Received ' + a.type});
                   break;
               default :
                   response.text = 'Nothing to see here';

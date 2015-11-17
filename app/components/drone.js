@@ -1,25 +1,30 @@
 var RollingSpider   = require('rolling-spider'),
+    clc             = require('cli-color'),
     isReady         = false,
     hasTakeoff      = false,
-    defaultSteps    = 8,
+    defaultSteps    = 5,
     settings;
 
 module.exports = {
 
     connect : function(_settings, callback){
-        var rollingSpider   = new RollingSpider();
-
         //just for namespace
         settings = _settings;
 
+        var rollingSpider   = new RollingSpider(),
+            socketio        = settings.module.socketio;
+
         rollingSpider.connect(function() {
-            console.log('rollingSpider connect');
+            console.log('Drone: rollingSpider connecting');
+            socketio.emit('console',{'data':'Drone: rollingSpider connecting'});
+
             rollingSpider.setup(function() {
                 rollingSpider.flatTrim();
                 rollingSpider.startPing();
                 rollingSpider.flatTrim();
                 isReady = true;
-                console.log('rollingSpider ready');
+                console.log(clc.green('Drone: rollingSpider is ready'));
+                socketio.emit('console',{'data':'Drone: rollingSpider is ready'});
 
                 //rollingSpider.on('battery', function () {
                 //    console.log('Battery: ' + rollingSpider.status.battery + '%');
@@ -38,10 +43,12 @@ module.exports = {
     setRollingSpider : function(type, myoSteps){
 
         var steps = (typeof myoSteps === 'undefined') ? defaultSteps : myoSteps,
-            rollingSpider   = settings.module.drone;
+            rollingSpider   = settings.module.drone,
+            socketio        = settings.module.socketio;
 
         if (!isReady) {
-            console.log('rollingSpider is not ready!');
+            console.log(clc.red('Drone: rollingSpider is NOT ready!'));
+            socketio.emit('console',{'data':'Drone: rollingSpider is NOT ready'});
             return;
         }
 
@@ -50,19 +57,24 @@ module.exports = {
                 hasTakeoff = false;
                 rollingSpider.flatTrim();
                 rollingSpider.land();
+                socketio.emit('drone', {'data':'land'});
             } else {
                 hasTakeoff = true;
                 rollingSpider.flatTrim();
                 rollingSpider.takeOff();
+                socketio.emit('drone', {'data':'takeoff'});
             }
+            socketio.emit('droneStatus', hasTakeoff);
         } else {
 
             switch (type) {
                 case 'up':
                     rollingSpider.up({ steps: steps});
+                    socketio.emit('drone', {'data':'up'});
                     break;
                 case 'down':
                     rollingSpider.down({ steps: steps});
+                    socketio.emit('drone', {'data':'down'});
                     break;
                 case 'left':
                     rollingSpider.left({ steps: steps});
@@ -72,20 +84,26 @@ module.exports = {
                     break;
                 case 'forward':
                     rollingSpider.forward({ steps: steps});
+                    socketio.emit('drone', {'data':'forward'});
                     break;
                 case 'backward':
                     rollingSpider.backward({ steps: steps});
+                    socketio.emit('drone', {'data':'backward'});
                     break;
                 case 'tiltLeft':
                     rollingSpider.tiltLeft({ steps: steps});
+                    socketio.emit('drone', {'data':'left'});
                     break;
                 case 'tiltRight':
                     rollingSpider.tiltRight({ steps: steps});
+                    socketio.emit('drone', {'data':'right'});
                     break;
                 case 'land':
                     rollingSpider.land();
                     rollingSpider.flatTrim();
                     hasTakeoff = false;
+                    socketio.emit('drone', {'data':'land'});
+                    socketio.emit('droneStatus', hasTakeoff);
                     break;
                 case 'flipfront':
                     rollingSpider.frontFlip();

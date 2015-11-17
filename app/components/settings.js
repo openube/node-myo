@@ -25,7 +25,16 @@ var settings = {
 
         },
         'myo':{
-
+            'imu': 'imu',
+            'toggleLock': 'toggleLock',
+            'movement': {
+                'left': 'left',
+                'right': 'right',
+                'up': 'up',
+                'down': 'down',
+                'forward': 'forward',
+                'backward': 'backward'
+            }
         },
         'server':{
 
