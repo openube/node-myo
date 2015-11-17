@@ -1,15 +1,23 @@
 .info{
   @include element(details){
-    @include clearfix();
+    float:left;
+    width:50%;
+  }
+  @include element(console){
+    float:left;
+    width:50%;
   }
 
+
   @include element(column){
-    float:left;
-    width:33.33333333%;
+
   }
 
   @include element(block){
-    padding:1em;
+    padding:10px;
+    p{
+      text-align:center;
+    }
   }
 
   @include element(list){
@@ -18,14 +26,14 @@
     margin:0;
     padding:0;
     text-align: center;
+    display:flex;
+    flex-wrap: wrap;
 
     li{
-      display:inline-block;
+      flex-grow: 1;
+      width: 25%;
     }
-    span{
-      padding:4px;
-      display:inline-block;
-    }
+
   }
 
   @include element(item){
@@ -37,5 +45,24 @@
 
   @include element(items){
     display:block;
+    padding:1em;
+    margin:1em;
+    min-height: 20vh;
+    border:1px solid lightblue;
+    border-top-width:1em;
+  }
+}
+
+
+.list{
+  @include element(label){
+    display:block;
+    background-color:#2F6FAD;
+    color:white;
+    padding:4px;
+  }
+  @include element(text){
+    display:block;
+    padding:4px;
   }
 }

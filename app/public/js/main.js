@@ -70,10 +70,10 @@ function updateInfoDetails(raw){
                 .find('li[data-type="'+ i +'"]')
                 .empty()
                 .append(
-                    $('<div>').addClass('label').html(i)
+                    $('<div>').addClass('list__label').html(i)
                 )
                 .append(
-                    $('<div>').addClass('label').html(round(j,3))
+                    $('<div>').addClass('list__text').html(round(j,3))
                 );
         });
     });

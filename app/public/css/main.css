@@ -39,6 +39,79 @@ h1 {
   padding: 1em;
 }
 
+.container__info:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.info__details {
+  float: left;
+  width: 50%;
+}
+
+.info__console {
+  float: left;
+  width: 50%;
+}
+
+.info__block {
+  padding: 10px;
+}
+
+.info__block p {
+  text-align: center;
+}
+
+.info__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.info__list:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.info__list li {
+  flex-grow: 1;
+  width: 25%;
+}
+
+.info__item {
+  display: block;
+}
+
+.info__item:first-of-type {
+  font-weight: 700;
+}
+
+.info__items {
+  display: block;
+  padding: 1em;
+  margin: 1em;
+  min-height: 20vh;
+  border: 1px solid lightblue;
+  border-top-width: 1em;
+}
+
+.list__label {
+  display: block;
+  background-color: #2F6FAD;
+  color: white;
+  padding: 4px;
+}
+
+.list__text {
+  display: block;
+  padding: 4px;
+}
+
 .visual__container {
   transition: all 0.3s cubic-bezier(0.17, 0.67, 0.83, 0.67);
   position: absolute;

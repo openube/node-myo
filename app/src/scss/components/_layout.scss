@@ -18,6 +18,7 @@
     min-height:300px;
   }
   @include element(info){
+    @include clearfix();
     border:1px solid lightblue;
     padding:1em;
   }
