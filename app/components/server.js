@@ -16,9 +16,6 @@ module.exports = function(settings){
         sassMiddleware({
             src: path.join(settings.config.appPath, '/src/scss/'),
             dest: path.join(settings.config.appPath, '/public/css/'),
-            //src: '/src/scss/',
-            //dest: '/public/css/',
-            //root: settings.config.appPath,
             debug: true,
             force: true,
             outputStyle: 'expanded',
@@ -42,10 +39,6 @@ module.exports = function(settings){
             { title : 'Node-myo UI' }
         )
     });
-
-    //app.listen(port, function () {
-    //    console.log('Running server at port %s', port);
-    //});
 
     app.listen();
 
