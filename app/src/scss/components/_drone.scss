@@ -1,3 +1,7 @@
+@keyframes hovertakeoff {
+  0%   { transform:translateY(-35%);}
+  100% { transform:translateY(-15%); }
+}
 
 .visual{
   @include element(container){
@@ -43,6 +47,10 @@
       }
     }
 
+    &.animTakeoff{
+      animation: hovertakeoff 1s infinite alternate;
+    }
+
     &.up{
       transform:translateY(-50%);
       &:before,
@@ -57,7 +65,7 @@
       &:before,
       &:after {
         top: 60%;
-        box-shadow: 0 130px 20px #777;
+        box-shadow: 0 80px 20px #777;
       }
     }
     &.land{
@@ -77,12 +85,14 @@
       transform:translateY(-25%) scale(0.8);
     }
 
-    &.tiltLeft{
-      transform:translate(-10%,-25%) rotate(-10deg);
+    //Left
+    &.tiltRight{
+      transform:translate(-50%,-25%) rotate(-10deg);
     }
 
-    &.tiltRight{
-      transform:translate(10%,-25%) rotate(10deg);
+    //Right
+    &.tiltLeft{
+      transform:translate(50%,-25%) rotate(10deg);
     }
 
     img{

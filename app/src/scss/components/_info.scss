@@ -1,11 +1,16 @@
 .info{
   @include element(details){
-    float:left;
-    width:50%;
+    @include media-query(md){
+      float:left;
+      width:50%;
+    }
+
   }
   @include element(console){
-    float:left;
-    width:50%;
+    @include media-query(md){
+      float:left;
+      width:50%;
+    }
   }
 
 
@@ -16,6 +21,10 @@
   @include element(block){
     padding:10px;
     p{
+      margin:0;
+      padding:5px 0;
+      background-color:#2F6FAD;
+      color:white;
       text-align:center;
     }
   }
@@ -47,7 +56,7 @@
     display:block;
     padding:1em;
     margin:1em;
-    min-height: 20vh;
+    min-height: 30vh;
     border:1px solid lightblue;
     border-top-width:1em;
   }

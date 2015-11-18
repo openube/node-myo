@@ -45,14 +45,18 @@ h1 {
   clear: both;
 }
 
-.info__details {
-  float: left;
-  width: 50%;
+@media only screen and (min-width: 767px) {
+  .info__details {
+    float: left;
+    width: 50%;
+  }
 }
 
-.info__console {
-  float: left;
-  width: 50%;
+@media only screen and (min-width: 767px) {
+  .info__console {
+    float: left;
+    width: 50%;
+  }
 }
 
 .info__block {
@@ -60,6 +64,10 @@ h1 {
 }
 
 .info__block p {
+  margin: 0;
+  padding: 5px 0;
+  background-color: #2F6FAD;
+  color: white;
   text-align: center;
 }
 
@@ -95,7 +103,7 @@ h1 {
   display: block;
   padding: 1em;
   margin: 1em;
-  min-height: 20vh;
+  min-height: 30vh;
   border: 1px solid lightblue;
   border-top-width: 1em;
 }
@@ -110,6 +118,15 @@ h1 {
 .list__text {
   display: block;
   padding: 4px;
+}
+
+@keyframes hovertakeoff {
+  0% {
+    transform: translateY(-35%);
+  }
+  100% {
+    transform: translateY(-15%);
+  }
 }
 
 .visual__container {
@@ -158,6 +175,10 @@ h1 {
   box-shadow: 0 80px 20px #777;
 }
 
+.visual__drone.animTakeoff {
+  animation: hovertakeoff 1s infinite alternate;
+}
+
 .visual__drone.up {
   transform: translateY(-50%);
 }
@@ -173,7 +194,7 @@ h1 {
 
 .visual__drone.down:before, .visual__drone.down:after {
   top: 60%;
-  box-shadow: 0 130px 20px #777;
+  box-shadow: 0 80px 20px #777;
 }
 
 .visual__drone.land {
@@ -193,12 +214,12 @@ h1 {
   transform: translateY(-25%) scale(0.8);
 }
 
-.visual__drone.tiltLeft {
-  transform: translate(-10%, -25%) rotate(-10deg);
+.visual__drone.tiltRight {
+  transform: translate(-50%, -25%) rotate(-10deg);
 }
 
-.visual__drone.tiltRight {
-  transform: translate(10%, -25%) rotate(10deg);
+.visual__drone.tiltLeft {
+  transform: translate(50%, -25%) rotate(10deg);
 }
 
 .visual__drone img {
