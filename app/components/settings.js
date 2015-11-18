@@ -6,7 +6,7 @@ var settings = {
         'port':  1337,
         'appPath': appPath,
         'pebbleUrl': '/pebblecall',
-        'subDomain': 'hahahaha'
+        'subDomain': 'whitemanjuu'
     },
     module:{
         'express': {
@@ -14,31 +14,10 @@ var settings = {
             'server': null
         },
         'drone' : null,
+        'droneModule' : null,
         'myo'   : null,
         'socketio' : null,
         'localtunnel': null
-    },
-    notification: {
-        'pebble':{
-        },
-        'drone':{
-
-        },
-        'myo':{
-            'imu': 'imu',
-            'toggleLock': 'toggleLock',
-            'movement': {
-                'left': 'left',
-                'right': 'right',
-                'up': 'up',
-                'down': 'down',
-                'forward': 'forward',
-                'backward': 'backward'
-            }
-        },
-        'server':{
-
-        }
     }
 };
 
