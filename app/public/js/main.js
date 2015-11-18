@@ -1,5 +1,5 @@
 var arr = [],
-    hasTakeOff = false,
+    hasTakeOff = true,
     timer;
 
 $(function() {
@@ -9,6 +9,7 @@ $(function() {
     socket.on('connect', function(data) {
         console.log('Socketio: connected');
         socket.emit('success', 'Success');
+        $('#console').empty();
     });
 
     socket.on('imu', function(data) {
@@ -25,21 +26,57 @@ $(function() {
     socket.on('droneStatus', function(bFlag) {
         hasTakeOff = bFlag;
     });
+
+    //$(window).on('keypress', function(e){
+    //    var key = e.which,
+    //        type;
+    //    switch(key){
+    //        case 32:
+    //            //space
+    //            type = 'takeoff';
+    //            break;
+    //        case 122:
+    //            //z
+    //            type = 'land';
+    //            break;
+    //        case 97:
+    //            //a
+    //            type = 'calibrate';
+    //            break;
+    //        case 120:
+    //            //x
+    //            type = 'togglelock';
+    //            break;
+    //    }
+    //
+    //    console.log('Key: Drone = ', type);
+    //
+    //    socket.emit('keypress',type);
+    //
+    //    e.preventDefault();
+    //});
 });
 
 function updateDrone(raw){
     var data = raw.data;
+    console.log('Drone: ', data);
+    if (data === 'land') hasTakeOff = false;
+    if (data === 'takeoff') hasTakeOff = true;
+
     if (hasTakeOff){
         $('#drone')
+            .removeClass('land')
+            //.removeClass('animTakeoff')
             .addClass('takeoff')
-            .addClass(data);
+            .addClass((data === 'takeoff' || typeof(data) === 'undefined') ? '' : data);
 
         window.clearTimeout(timer);
-
         timer = window.setTimeout(function(){
-            $('#drone').removeClass(data);
+            $('#drone').attr('class', 'visual__drone takeoff ')
         },1000);
     } else{
+        window.clearTimeout(timer);
+        hasTakeOff = false;
         $('#drone').attr('class', 'visual__drone land');
     }
 }
