@@ -7,6 +7,7 @@ var Myo             = require('myo'),
         y:-0.3
     },
     delay           = 1000,
+    imuDelay        = 250,
     timeOffset      = new Date().getTime(),
     imuOffset       = new Date().getTime();
 
@@ -61,7 +62,7 @@ module.exports = {
             var data = raw.accelerometer;
             accelerometer = data;
 
-            if ((new Date().getTime() - imuOffset) > 250) {
+            if ((new Date().getTime() - imuOffset) > imuDelay) {
                 imuOffset = new Date().getTime();
                 socketio.emit('imu', {'data':raw});
             }

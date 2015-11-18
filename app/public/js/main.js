@@ -1,5 +1,5 @@
 var arr = [],
-    hasTakeOff = true,
+    hasTakeOff = false,
     timer;
 
 $(function() {
@@ -25,6 +25,7 @@ $(function() {
     });
     socket.on('droneStatus', function(bFlag) {
         hasTakeOff = bFlag;
+        console.log('droneStatus = ', hasTakeOff)
     });
 
     //$(window).on('keypress', function(e){
@@ -60,8 +61,8 @@ $(function() {
 function updateDrone(raw){
     var data = raw.data;
     console.log('Drone: ', data);
-    if (data === 'land') hasTakeOff = false;
-    if (data === 'takeoff') hasTakeOff = true;
+    //if (data === 'land') hasTakeOff = false;
+    //if (data === 'takeoff') hasTakeOff = true;
 
     if (hasTakeOff){
         $('#drone')
@@ -76,7 +77,7 @@ function updateDrone(raw){
         },1000);
     } else{
         window.clearTimeout(timer);
-        hasTakeOff = false;
+        //hasTakeOff = false;
         $('#drone').attr('class', 'visual__drone land');
     }
 }

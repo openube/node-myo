@@ -104,7 +104,7 @@ module.exports = {
                     break;
                 case 'land':
                     rollingSpider.land();
-                    rollingSpider.flatTrim();
+                    //rollingSpider.flatTrim();
                     hasTakeoff = false;
                     socketio.emit('drone', {'data':'land'});
                     socketio.emit('droneStatus', hasTakeoff);
