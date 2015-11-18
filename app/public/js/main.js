@@ -64,7 +64,7 @@ function updateDrone(raw){
     //if (data === 'land') hasTakeOff = false;
     //if (data === 'takeoff') hasTakeOff = true;
 
-    if (hasTakeOff){
+    if (data !== 'land'){
         $('#drone')
             .removeClass('land')
             //.removeClass('animTakeoff')
