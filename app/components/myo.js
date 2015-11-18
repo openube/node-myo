@@ -72,20 +72,28 @@ module.exports = {
                     if(!socketio) socketio = settings.module.socketio;
                     if ((movementOffset.y - data.y) > 0.4){
                         console.log('Myo: Tilt left');
+                        //socketio.emit('drone',{'data':'tiltLeft'});
+
                         socketio.emit('console', {'data':'Myo: Tilt left'});
                         drone.setRollingSpider('tiltLeft');
                     } else if ((movementOffset.y - data.y) < -0.4){
                         console.log('Myo: Tilt right');
+                        //socketio.emit('drone',{'data':'tiltRight'});
+
                         socketio.emit('console', {'data':'Myo: Tilt right'});
                         drone.setRollingSpider('tiltRight');
                     }
 
                     if ((movementOffset.x - data.x) > 0.35){
                         console.log('Myo: Move down');
+                        //socketio.emit('drone',{'data':'down'});
+
                         socketio.emit('console', {'data':'Myo: Move down'});
                         drone.setRollingSpider('down');
                     } else if ((movementOffset.x - data.x) < -0.35){
                         console.log('Myo: Move up');
+                        //socketio.emit('drone',{'data':'up'});
+
                         socketio.emit('console', {'data':'Myo: Move up'});
                         drone.setRollingSpider('up');
                     }

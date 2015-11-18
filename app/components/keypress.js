@@ -42,19 +42,19 @@ var setListeners = function(drone,myo,settings){
 
             case 'space':
                 drone.setRollingSpider('takeoff');
-                socketio.emit('drone',{'data':'takeoff'});
+                //socketio.emit('drone',{'data':'takeoff'});
                 console.log('Key: Take off');
                 break;
 
             case 'h':
                 drone.setRollingSpider('hover');
-                socketio.emit('drone',{'data':'hover'});
+                //socketio.emit('drone',{'data':'hover'});
                 console.log('Key: Hover');
                 break;
 
             case 'b':
                 drone.setRollingSpider('flipback');
-                socketio.emit('drone',{'data':'flipback'});
+                //socketio.emit('drone',{'data':'flipback'});
                 console.log('Key: flipback');
                 break;
 
@@ -71,7 +71,7 @@ var setListeners = function(drone,myo,settings){
 
             case 'z' :
                 drone.setRollingSpider('land');
-                socketio.emit('drone',{'data':'land'});
+                //socketio.emit('drone',{'data':'land'});
                 console.log('Key: Land');
                 break;
 
