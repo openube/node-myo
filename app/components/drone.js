@@ -65,6 +65,7 @@ module.exports = {
                 socketio.emit('drone', {'data':'takeoff'});
             }
             socketio.emit('droneStatus', hasTakeoff);
+            console.log('drone: droneStatus =', hasTakeoff)
         } else {
 
             switch (type) {
