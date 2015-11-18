@@ -91,12 +91,16 @@ module.exports = {
                     socketio.emit('drone', {'data':'backward'});
                     break;
                 case 'tiltLeft':
-                    rollingSpider.tiltLeft({ steps: steps});
+                    rollingSpider.tiltLeft({ steps: steps + 5});
                     socketio.emit('drone', {'data':'left'});
                     break;
                 case 'tiltRight':
-                    rollingSpider.tiltRight({ steps: steps});
+                    rollingSpider.tiltRight({ steps: steps + 5});
                     socketio.emit('drone', {'data':'right'});
+                    break;
+                case 'hover':
+                    rollingSpider.hover();
+                    socketio.emit('drone', {'data':'hover'});
                     break;
                 case 'land':
                     rollingSpider.land();
