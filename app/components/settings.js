@@ -6,7 +6,7 @@ var settings = {
         'port':  1337,
         'appPath': appPath,
         'pebbleUrl': '/pebblecall',
-        'subDomain': 'whitemanjuu'
+        'subDomain': 'somesubdomain123'
     },
     module:{
         'express': {

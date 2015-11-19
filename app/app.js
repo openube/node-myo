@@ -1,4 +1,4 @@
-var allowTunnel     = false,
+var allowTunnel     = true,
     async           = require('async'),
     settings        = require('./components/settings'),
     localtunnel     = require('./components/localtunnel'),
