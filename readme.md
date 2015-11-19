@@ -44,6 +44,24 @@ node app.js
 
 To discover the ID and name of a certain drone, use ```app/lib/discovery.js```
 
+##GUI
+
+A node express server is run, served with Jade templates. Open the following URL in your web browser
+
+```
+http://localhost:1337
+```
+
+The web page serves three purposes:
+
+- Provide a Myo gestures representation, using a drone image.
+- Provide the IMU data output by Myo (Gyrocope, Accelerometer and Orientation). Outputs the reading every 250ms.
+- Output selected commands/operations being called behind the scene e.g. SocketIO is connected, etc.
+
+
+__Note:__ This is still a work in progress. A lot of keypresses are not ported over to the GUI. For the time being, it only displays the following detected gestures from Myo: tilt left, tilt right, takeoff and land
+
+
 ##Controls
 
 
@@ -59,6 +77,8 @@ To discover the ID and name of a certain drone, use ```app/lib/discovery.js```
 |x | Toggle lock. This toggles the drone to listen to Myo movements|
 |z | Drone land |
 |m | Emergency landing|
+|h | Hover |
+|b | Flips 360 back |
 |up arrow| Forward |
 |down arrow| Backward |
 |left arrow| Turn left |
