@@ -2,8 +2,6 @@ var socketio    = require('socket.io'),
     clc         = require('cli-color'),
     Q           = require('q');
 
-//TODO: Need to stop multiple instance callbacks
-
 module.exports = function(settings, callback){
 
     var io          = socketio.listen(settings.module.express.server),
@@ -24,6 +22,8 @@ module.exports = function(settings, callback){
         });
 
         socket.on('keypress', function(action){
+
+            console.log(action);
             //if (!droneModule) droneModule = settings.module.droneModule;
             //if (!myo) droneModule = settings.module.myo;
             //

@@ -28,34 +28,34 @@ $(function() {
         console.log('droneStatus = ', hasTakeOff)
     });
 
-    //$(window).on('keypress', function(e){
-    //    var key = e.which,
-    //        type;
-    //    switch(key){
-    //        case 32:
-    //            //space
-    //            type = 'takeoff';
-    //            break;
-    //        case 122:
-    //            //z
-    //            type = 'land';
-    //            break;
-    //        case 97:
-    //            //a
-    //            type = 'calibrate';
-    //            break;
-    //        case 120:
-    //            //x
-    //            type = 'togglelock';
-    //            break;
-    //    }
-    //
-    //    console.log('Key: Drone = ', type);
-    //
-    //    socket.emit('keypress',type);
-    //
-    //    e.preventDefault();
-    //});
+    $(window).on('keypress', function(e){
+        var key = e.which,
+            type;
+        switch(key){
+            case 32:
+                //space
+                type = 'takeoff';
+                break;
+            case 122:
+                //z
+                type = 'land';
+                break;
+            case 97:
+                //a
+                type = 'calibrate';
+                break;
+            case 120:
+                //x
+                type = 'togglelock';
+                break;
+        }
+
+        console.log('Key: Drone = ', e.which);
+
+        socket.emit('keypress',type);
+
+        e.preventDefault();
+    });
 });
 
 function updateDrone(raw){
