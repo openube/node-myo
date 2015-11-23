@@ -31,6 +31,7 @@ module.exports = {
 
                 deferred.resolve(rollingSpider);
 
+                //Drains battery. Better not run
                 //rollingSpider.on('battery', function () {
                 //    console.log('Battery: ' + rollingSpider.status.battery + '%');
                 //    rollingSpider.signalStrength(function (err, val) {
