@@ -8,8 +8,7 @@ var allowTunnel     = false,
     drone           = require('./components/drone'),
     keypress        = require('./components/keypress'),
     socketio        = require('./components/socketio'),
-    myMyo,
-    myDrone;
+    myMyo;
 
 ((allowTunnel)
     ? localtunnel(settings)
