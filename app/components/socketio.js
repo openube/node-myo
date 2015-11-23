@@ -1,13 +1,15 @@
 var socketio    = require('socket.io'),
-    clc         = require('cli-color');
+    clc         = require('cli-color'),
+    Q           = require('q');
 
 //TODO: Need to stop multiple instance callbacks
 
-module.exports = function(settings,callback){
+module.exports = function(settings, callback){
 
-    var io  = socketio.listen(settings.module.express.server),
+    var io          = socketio.listen(settings.module.express.server),
         droneModule = settings.module.droneModule,
-        myo = settings.module.myo;
+        myo         = settings.module.myo,
+        deferred    = Q.defer();
 
 
     io.on('connection', function(socket){
@@ -18,6 +20,7 @@ module.exports = function(settings,callback){
             socket.emit('console', {'data': 'Socketio: Connection success'})
 
             settings.module.socketio = io;
+            deferred.resolve(io);
         });
 
         socket.on('keypress', function(action){
@@ -34,7 +37,9 @@ module.exports = function(settings,callback){
         });
 
     });
-    callback(null, io);
 
-    return io;
+    deferred.promise.nodeify(callback);
+    return deferred.promise;
+
+
 };

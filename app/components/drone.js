@@ -1,5 +1,6 @@
 var RollingSpider   = require('rolling-spider'),
     clc             = require('cli-color'),
+    Q               = require('q'),
     isReady         = false,
     hasTakeoff      = false,
     defaultSteps    = 5,
@@ -12,7 +13,9 @@ module.exports = {
         settings = _settings;
 
         var rollingSpider   = new RollingSpider(),
-            socketio        = settings.module.socketio;
+            socketio        = settings.module.socketio,
+            deferred        = Q.defer(),
+            _this           = this;
 
         rollingSpider.connect(function() {
             console.log('Drone: rollingSpider connecting');
@@ -26,6 +29,8 @@ module.exports = {
                 console.log(clc.green('Drone: rollingSpider is ready'));
                 socketio.emit('console',{'data':'Drone: rollingSpider is ready'});
 
+                deferred.resolve(rollingSpider);
+
                 //rollingSpider.on('battery', function () {
                 //    console.log('Battery: ' + rollingSpider.status.battery + '%');
                 //    rollingSpider.signalStrength(function (err, val) {
@@ -36,8 +41,8 @@ module.exports = {
             });
         });
         settings.module.drone = rollingSpider;
-        callback(null);
-        return rollingSpider;
+        deferred.promise.nodeify(callback);
+        return deferred.promise;
     },
 
     setRollingSpider : function(type, myoSteps){
