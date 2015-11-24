@@ -1,4 +1,6 @@
-var url, io, drone;
+'use strict';
+
+let url, io, drone;
 
 module.exports = {
   setAjaxCall: function(app,_drone,settings){
@@ -7,8 +9,8 @@ module.exports = {
       drone = _drone;
 
       app.post(url, function (req, res) {
-          var a = req.body,
-              response = {};
+          let a         = req.body;
+          let response  = {};
 
           switch (a.type) {
               case 'ping':

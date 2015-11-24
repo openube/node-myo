@@ -1,20 +1,23 @@
-var Myo             = require('myo'),
-    clc             = require('cli-color'),
-    accelerometer   = {},
-    isLocked        = true,
-    movementOffset  = {
-        x:-0.2,
-        y:-0.3
-    },
-    delay           = 1000,
-    imuDelay        = 250,
-    timeOffset      = new Date().getTime(),
-    imuOffset       = new Date().getTime();
+'use strict';
+
+const Myo             = require('myo');
+const clc             = require('cli-color');
+const imuDelay        = 250;
+const delay           = 1000;
+
+let accelerometer   = {};
+let isLocked        = true;
+let movementOffset  = {
+    x:-0.2,
+    y:-0.3
+};
+let timeOffset      = new Date().getTime();
+let imuOffset       = new Date().getTime();
 
 module.exports = {
 
     connect: function(drone,settings){
-        var socketio = settings.module.socketio;
+        let  socketio = settings.module.socketio;
         Myo.connect();
 
         Myo.on('connected',function(){
@@ -59,7 +62,7 @@ module.exports = {
         });
 
         Myo.on('imu', function(raw){
-            var data = raw.accelerometer;
+            let data = raw.accelerometer;
             accelerometer = data;
 
             if ((new Date().getTime() - imuOffset) > imuDelay) {

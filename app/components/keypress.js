@@ -1,9 +1,10 @@
-var keypress    = require('keypress'),
-    clc         = require('cli-color');
+'use strict';
+const keypress    = require('keypress');
+const clc         = require('cli-color');
 
 var setListeners = function(drone,myo,settings){
-    var tunnel      = settings.module.localtunnel,
-        socketio    = settings.module.socketio;
+    let tunnel      = settings.module.localtunnel;
+    let socketio    = settings.module.socketio;
 
     keypress(process.stdin);
     process.stdin.resume();

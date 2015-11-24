@@ -1,10 +1,13 @@
-var RollingSpider   = require('rolling-spider'),
-    clc             = require('cli-color'),
-    Q               = require('q'),
-    isReady         = false,
-    hasTakeoff      = false,
-    defaultSteps    = 5,
-    settings;
+'use strict';
+
+const RollingSpider   = require('rolling-spider');
+const clc             = require('cli-color');
+const Q               = require('q');
+
+let isReady         = false;
+let hasTakeoff      = false;
+let defaultSteps    = 5;
+let settings;
 
 module.exports = {
 
@@ -12,10 +15,10 @@ module.exports = {
         //just for namespace
         settings = _settings;
 
-        var rollingSpider   = new RollingSpider(),
-            socketio        = settings.module.socketio,
-            deferred        = Q.defer(),
-            _this           = this;
+        let rollingSpider   = new RollingSpider();
+        let socketio        = settings.module.socketio;
+        let deferred        = Q.defer();
+        let _this           = this;
 
         rollingSpider.connect(function() {
             console.log('Drone: rollingSpider connecting');
@@ -48,9 +51,9 @@ module.exports = {
 
     setRollingSpider : function(type, myoSteps){
 
-        var steps = (typeof myoSteps === 'undefined') ? defaultSteps : myoSteps,
-            rollingSpider   = settings.module.drone,
-            socketio        = settings.module.socketio;
+        let steps = (typeof myoSteps === 'undefined') ? defaultSteps : myoSteps;
+        let rollingSpider   = settings.module.drone;
+        let socketio        = settings.module.socketio;
 
         if (!isReady) {
             console.log(clc.red('Drone: rollingSpider is NOT ready!'));

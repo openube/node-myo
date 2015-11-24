@@ -1,13 +1,15 @@
-var socketio    = require('socket.io'),
-    clc         = require('cli-color'),
-    Q           = require('q');
+'use strict';
+
+const socketio    = require('socket.io');
+const clc         = require('cli-color');
+const Q           = require('q');
 
 module.exports = function(settings, callback){
 
-    var io          = socketio.listen(settings.module.express.server),
-        droneModule = settings.module.droneModule,
-        myo         = settings.module.myo,
-        deferred    = Q.defer();
+    const io            = socketio.listen(settings.module.express.server);
+    let droneModule     = settings.module.droneModule;
+    let myo             = settings.module.myo;
+    let deferred        = Q.defer();
 
 
     io.on('connection', function(socket){

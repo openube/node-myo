@@ -1,18 +1,19 @@
-var localtunnel = require('localtunnel'),
-    clc         = require('cli-color'),
-    Q           = require('q');
-    opts        = {
+'use strict';
+const localtunnel = require('localtunnel');
+const clc         = require('cli-color');
+const Q           = require('q');
+const opts        = {
                     subdomain: 'somesubdomainabc123'
                 };
 
 module.exports = function(settings, callback){
-    var deferred = Q.defer();
+     let deferred = Q.defer();
 
     opts        = {
                     'subdomain': settings.config.subDomain
                 };
 
-    var tunnel  = localtunnel(settings.config.port, opts ,function(err, tunnel) {
+    let tunnel  = localtunnel(settings.config.port, opts ,function(err, tunnel) {
         if (err){
             console.log(err);
         }
