@@ -1,3 +1,5 @@
+'use strict';
+
 var arr = [],
     hasTakeOff = false,
     timer;
