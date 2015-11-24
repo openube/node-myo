@@ -1,12 +1,14 @@
-var path        = require('path'),
-    appPath     = path.join(__dirname, '../');
+'use strict';
+
+const path        = require('path');
+const appPath     = path.join(__dirname, '../');
 
 var settings = {
     config:{
         'port':  1337,
         'appPath': appPath,
         'pebbleUrl': '/pebblecall',
-        'subDomain': 'somesubdomain123'
+        'subDomain': 'whitemanjuu'
     },
     module:{
         'express': {

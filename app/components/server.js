@@ -1,15 +1,17 @@
-var clc             = require('cli-color'),
-    bodyParser      = require('body-parser'),
-    path            = require('path'),
-    sassMiddleware  = require('node-sass-middleware'),
-    express         = require('express'),
-    http            = require('http'),
-    app             = express(),
-    server          = http.Server(app),
-    viewsPath;
+'use strict';
+const clc               = require('cli-color');
+const bodyParser        = require('body-parser');
+const path              = require('path');
+const sassMiddleware    = require('node-sass-middleware');
+const express           = require('express');
+const http              = require('http');
+const app               = express();
+const server              = http.Server(app);
+let viewsPath;
 
 module.exports = function(settings){
     viewsPath   = path.join(settings.config.appPath, '/views');
+
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(

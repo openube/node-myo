@@ -1,14 +1,17 @@
-var allowTunnel     = false,
-    promise         = require('promise'),
-    settings        = require('./components/settings'),
-    localtunnel     = require('./components/localtunnel'),
-    server          = require('./components/server')(settings),
-    pebble          = require('./components/pebble'),
-    myo             = require('./components/myo'),
-    drone           = require('./components/drone'),
-    keypress        = require('./components/keypress'),
-    socketio        = require('./components/socketio'),
-    myMyo;
+'use strict';
+
+const allowTunnel   = false;
+const promise       = require('promise');
+const settings      = require('./components/settings');
+const localtunnel   = require('./components/localtunnel');
+const server        = require('./components/server')(settings);
+const pebble        = require('./components/pebble');
+const myo           = require('./components/myo');
+const drone         = require('./components/drone');
+const keypress      = require('./components/keypress');
+const socketio      = require('./components/socketio');
+
+let myMyo;
 
 ((allowTunnel)
     ? localtunnel(settings)
