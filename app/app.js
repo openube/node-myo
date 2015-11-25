@@ -1,6 +1,6 @@
 'use strict';
 
-const allowTunnel   = false;
+const commander     = require('commander');
 const promise       = require('promise');
 const settings      = require('./components/settings');
 const localtunnel   = require('./components/localtunnel');
@@ -11,7 +11,15 @@ const drone         = require('./components/drone');
 const keypress      = require('./components/keypress');
 const socketio      = require('./components/socketio');
 
-let myMyo;
+const defaultTunnel   = false;
+
+//CLI Args
+commander
+    .version('1.0.0')
+    .option('-l, --localtunnel <n>', 'Toggle localtunnel 1|0', parseInt)
+    .parse(process.argv);
+
+const allowTunnel = (typeof commander.localtunnel === 'undefined') ? defaultTunnel : Boolean(commander.localtunnel);
 
 ((allowTunnel)
     ? localtunnel(settings)
@@ -27,7 +35,7 @@ let myMyo;
     })
     .then(function(drone){
         console.log('Promise: Drone has started');
-        myMyo = myo.connect(drone,settings);
+        myo.connect(drone,settings);
         keypress.setListeners(drone,myo,settings);
         pebble.setAjaxCall(server.app, drone, settings);
     })
