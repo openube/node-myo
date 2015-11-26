@@ -29,13 +29,13 @@ module.exports = function(settings, callback){
             //if (!droneModule) droneModule = settings.module.droneModule;
             //if (!myo) droneModule = settings.module.myo;
             //
-            //if (action==='calibrate'){
-            //    myo.setAccelerometer();
-            //} else if (action ==='togglelock'){
-            //    myo.toggleLocked();
-            //} else {
-            //   // droneModule.setRollingSpider(action);
-            //}
+            if (action==='calibrate'){
+                myo.setAccelerometer();
+            } else if (action ==='togglelock'){
+                myo.toggleLocked();
+            } else {
+               // droneModule.setRollingSpider(action);
+            }
         });
 
     });

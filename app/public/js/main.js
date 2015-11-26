@@ -32,29 +32,42 @@ $(function() {
 
     $(window).on('keypress', function(e){
         var key = e.which,
-            type;
+            obj = {};
         switch(key){
             case 32:
                 //space
-                type = 'takeoff';
+                obj = {
+                    type: 'takeoff',
+                    data: 'GUI: Takeoff'
+                };
                 break;
             case 122:
                 //z
-                type = 'land';
+                obj = {
+                    type: 'land',
+                    data: 'GUI: Land'
+                };
                 break;
             case 97:
                 //a
-                type = 'calibrate';
+                obj = {
+                    type: 'calibrate',
+                    data: 'GUI: Calibrate'
+                };
                 break;
             case 120:
                 //x
-                type = 'togglelock';
+                obj = {
+                    type: 'togglelock',
+                    data:'GUI: Toggle Lock'
+                };
                 break;
         }
 
         console.log('Key: Drone = ', e.which);
 
-        socket.emit('keypress',type);
+        updateConsoleDetails(obj);
+        socket.emit('keypress',obj.type);
 
         e.preventDefault();
     });
