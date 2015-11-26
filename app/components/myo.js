@@ -2,6 +2,7 @@
 
 const Myo             = require('myo');
 const clc             = require('cli-color');
+const _               = require('lodash');
 const imuDelay        = 250;
 const delay           = 1000;
 

@@ -19,6 +19,7 @@
     "jade": "^1.11.0",
     "keypress": "^0.2.1",
     "localtunnel": "^1.8.0",
+    "lodash": "^3.10.1",
     "myo": "^2.1.0",
     "noble": "^1.2.0",
     "node-sass-middleware": "^0.9.7",
