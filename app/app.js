@@ -2,7 +2,7 @@
 
 const settings      = require('./components/settings');
 
-const log           = require('custom-logger').config({ level: 0,format: "%event% %padding%[%timestamp%]: %message%" });
+const log           = require('custom-logger').config({ level: 0,format: "%event% %padding%[%timestamp%]: %message%",timestamp: "h:MM:ss TT" });
 const commander     = require('commander');
 const promise       = require('promise');
 const localtunnel   = require('./components/localtunnel');
