@@ -1,8 +1,8 @@
 'use strict';
 const localtunnel = require('localtunnel');
-const clc         = require('cli-color');
+const log         = require('custom-logger').config({ level: 0 });
 const Q           = require('q');
-const opts        = {
+let  opts         = {
                     subdomain: 'somesubdomainabc123'
                 };
 
@@ -15,15 +15,15 @@ module.exports = function(settings, callback){
 
     let tunnel  = localtunnel(settings.config.port, opts ,function(err, tunnel) {
         if (err){
-            console.log(err);
+            log.warn(err);
         }
-        console.log(clc.blue('LocalTunnel: Running',tunnel.url));
+        log.info('LocalTunnel: Running',tunnel.url);
         settings.module.localtunnel = tunnel;
         deferred.resolve(tunnel);
     });
 
     tunnel.on('close', function() {
-        console.log(clc.green('LocalTunnel: localtunnel is closed'));
+        log.warn('LocalTunnel: localtunnel is closed');
     });
 
     deferred.promise.nodeify(callback);

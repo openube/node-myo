@@ -1,8 +1,10 @@
 'use strict';
 
+const settings      = require('./components/settings');
+
+const log           = require('custom-logger').config({ level: 0,format: "%event% %padding%[%timestamp%]: %message%" });
 const commander     = require('commander');
 const promise       = require('promise');
-const settings      = require('./components/settings');
 const localtunnel   = require('./components/localtunnel');
 const server        = require('./components/server')(settings);
 const pebble        = require('./components/pebble');
@@ -25,16 +27,16 @@ const allowTunnel = (typeof commander.localtunnel === 'undefined') ? defaultTunn
     ? localtunnel(settings)
     : promise.resolve())
     .then(function(tunnel){
-        console.log('Promise: Tunnel has started');
+        log.info('Promise: Tunnel', (allowTunnel ? 'is enabled':'is disabled'));
         return socketio(settings)
     })
     .then(function (io) {
-        console.log('Promise: Socketio has started');
+        log.info('Promise: Socketio has started');
         drone.connect(settings);
         return drone;
     })
     .then(function(drone){
-        console.log('Promise: Drone has started');
+        log.info('Promise: Drone has started');
         myo.connect(drone,settings);
         keypress.setListeners(drone,myo,settings);
         pebble.setAjaxCall(server.app, drone, settings);

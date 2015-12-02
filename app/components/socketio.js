@@ -1,22 +1,23 @@
 'use strict';
 
 const socketio    = require('socket.io');
-const clc         = require('cli-color');
+const log         = require('custom-logger').config({ level: 0 });
 const Q           = require('q');
+const myo         = require('myo');
 
 module.exports = function(settings, callback){
 
     const io            = socketio.listen(settings.module.express.server);
     let droneModule     = settings.module.droneModule;
-    let myo             = settings.module.myo;
+    //let myo             = settings.module.myo;
     let deferred        = Q.defer();
 
 
     io.on('connection', function(socket){
-        console.log(clc.blue('Socketio: Started'));
+        log.debug('Socketio: Started');
 
         socket.on('success', function(data) {
-            console.log(clc.green('Socketio: Connection success'));
+            log.info('Socketio: Connection success');
             socket.emit('console', {'data': 'Socketio: Connection success'})
 
             settings.module.socketio = io;
@@ -25,14 +26,14 @@ module.exports = function(settings, callback){
 
         socket.on('keypress', function(action){
 
-            console.log(action);
+            log.debug(action);
             //if (!droneModule) droneModule = settings.module.droneModule;
             //if (!myo) droneModule = settings.module.myo;
             //
             if (action==='calibrate'){
-                myo.setAccelerometer();
+                //myo.setAccelerometer();
             } else if (action ==='togglelock'){
-                myo.toggleLocked();
+                //myo.toggleLocked();
             } else {
                // droneModule.setRollingSpider(action);
             }

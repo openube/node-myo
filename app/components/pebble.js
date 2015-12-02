@@ -1,5 +1,6 @@
 'use strict';
 
+const log         = require('custom-logger');
 let url, io, drone;
 
 module.exports = {
@@ -16,7 +17,7 @@ module.exports = {
               case 'ping':
                   response.text = 'Success';
                   response.type = a.type;
-                  console.log('Pebble: Got a ping from pebble');
+                  log.info('Pebble: Got a ping from pebble');
                   io.emit('console',{'data': 'Pebble: Received a ping'});
                   break;
               case 'takeoff':
@@ -29,11 +30,12 @@ module.exports = {
                   drone.setRollingSpider(a.type);
                   response.type = a.type;
 
-                  console.log('Pebble: Received', a.type);
+                  log.info('Pebble: Received', a.type);
                   io.emit('console',{'data': 'Pebble: Received ' + a.type});
                   break;
               default :
                   response.text = 'Nothing to see here';
+                  log.info('Error: ', response.text);
                   break;
           }
           res.setHeader('Content-Type', 'application/json');

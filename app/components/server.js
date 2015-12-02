@@ -1,5 +1,5 @@
 'use strict';
-const clc               = require('cli-color');
+const log               = require('custom-logger').config({ level: 0 });
 const bodyParser        = require('body-parser');
 const path              = require('path');
 const sassMiddleware    = require('node-sass-middleware');
@@ -45,7 +45,7 @@ module.exports = function(settings){
     app.listen();
 
     server.listen(settings.config.port,function(){
-        console.log(clc.blue('Server: Server is listening'));
+        log.info('Server: Server is listening');
     });
 
     settings.module.express.app = app;

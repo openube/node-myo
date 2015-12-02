@@ -12,8 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "body-parser": "^1.13.3",
-    "cli-color": "^1.1.0",
     "commander": "^2.9.0",
+    "custom-logger": "^0.3.1",
     "express": "^4.13.1",
     "http": "0.0.0",
     "jade": "^1.11.0",

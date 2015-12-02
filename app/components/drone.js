@@ -1,7 +1,7 @@
 'use strict';
 
 const RollingSpider   = require('rolling-spider');
-const clc             = require('cli-color');
+const log             = require('custom-logger').config({ level: 0 });
 const Q               = require('q');
 
 let isReady         = false;
@@ -21,7 +21,7 @@ module.exports = {
         let _this           = this;
 
         rollingSpider.connect(function() {
-            console.log('Drone: rollingSpider connecting');
+            log.debug('Drone: rollingSpider connecting');
             socketio.emit('console',{'data':'Drone: rollingSpider connecting'});
 
             rollingSpider.setup(function() {
@@ -29,7 +29,7 @@ module.exports = {
                 rollingSpider.startPing();
                 rollingSpider.flatTrim();
                 isReady = true;
-                console.log(clc.green('Drone: rollingSpider is ready'));
+                log.info('Drone: rollingSpider is ready');
                 socketio.emit('console',{'data':'Drone: rollingSpider is ready'});
 
                 deferred.resolve(rollingSpider);
@@ -45,6 +45,7 @@ module.exports = {
             });
         });
         settings.module.drone = rollingSpider;
+        settings.module.droneModule = _this;
         deferred.promise.nodeify(callback);
         return deferred.promise;
     },
@@ -56,7 +57,7 @@ module.exports = {
         let socketio        = settings.module.socketio;
 
         if (!isReady) {
-            console.log(clc.red('Drone: rollingSpider is NOT ready!'));
+            log.error('Drone: rollingSpider is NOT ready!');
             socketio.emit('console',{'data':'Drone: rollingSpider is NOT ready'});
             return;
         }
@@ -74,7 +75,7 @@ module.exports = {
                 socketio.emit('drone', {'data':'takeoff'});
             }
             socketio.emit('droneStatus', hasTakeoff);
-            console.log('drone: droneStatus =', hasTakeoff)
+            log.debug('drone: droneStatus =', hasTakeoff);
         } else {
 
             switch (type) {
