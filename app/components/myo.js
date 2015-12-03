@@ -4,22 +4,23 @@ const Myo             = require('myo');
 const log             = require('custom-logger').config({ level: 0 });
 const _               = require('lodash');
 const imuDelay        = 250;
-const delay           = 1000;
-//const alpha           = 0.5;
-//const M_PI            = 3.14159265358979323846264338327950288;
+const delay           = 250;
+const alpha           = 0.5;
+const M_PI            = 3.14159265358979323846264338327950288;
 
 let accelerometer   = {};
 let isLocked        = true;
-let movementOffset  = {
-    x:-0.2,
-    y:-0.3
-};
+//let movementOffset  = {
+//    x:-0.2,
+//    y:-0.3
+//};
+let movementOffset  = 35;
 let timeOffset      = new Date().getTime();
 let imuOffset       = new Date().getTime();
 
-//let fXg             = 0;
-//let fYg             = 0;
-//let fZg             = 0;
+let fXg             = 0;
+let fYg             = 0;
+let fZg             = 0;
 
 module.exports = {
 
@@ -46,7 +47,7 @@ module.exports = {
         });
 
         Myo.on('unlocked',function(){
-            log.debug(clc.green('Myo: Unlocked'));
+            log.debug('Myo: Unlocked');
             socketio.emit('console', {'data':'Myo: Unlocked'});
             this.unlock();
         });
@@ -75,30 +76,59 @@ module.exports = {
 
             accelerometer = data;
 
+
+
+            fXg = data.x * alpha + (fXg * (1.0 - alpha));
+            fYg = data.y * alpha + (fYg * (1.0 - alpha));
+            fZg = data.z * alpha + (fZg * (1.0 - alpha));
+
+            roll  = Math.round((Math.atan2(-fYg, fZg)*180.0)/M_PI);
+            pitch = Math.round((Math.atan2(fXg, Math.sqrt(fYg*fYg + fZg*fZg))*180.0)/M_PI);
+
+            //accelerometer.movement.roll = roll;
+            //accelerometer.movement.pitch = pitch;
+
             if ((new Date().getTime() - imuOffset) > imuDelay) {
                 imuOffset = new Date().getTime();
-                socketio.emit('imu', {'data':raw});
+                let movement = {'movement':{'roll':roll, 'pitch':pitch}};
+                let newRaw = raw;
+                _.assign(newRaw, movement);
+                socketio.emit('imu', {'data':newRaw});
             }
-
-           // fXg = data.x * alpha + (fXg * (1.0 - alpha));
-           // fYg = data.y * alpha + (fYg * (1.0 - alpha));
-           // fZg = data.z * alpha + (fZg * (1.0 - alpha));
-
-           // roll  = (Math.atan2(-fYg, fZg)*180.0)/M_PI;
-           // pitch = (Math.atan2(fXg, Math.sqrt(fYg*fYg + fZg*fZg))*180.0)/M_PI;
-
-          //  log.debug('roll ==>', roll);
-          //  log.debug('pitch ==>', pitch);
 
             if (!isLocked) {
                 if ((new Date().getTime() - timeOffset) > delay) {
                     timeOffset = new Date().getTime();
                     if(!socketio) socketio = settings.module.socketio;
 
+                    //log.debug('roll ==>', roll, ', pitch==>', pitch);
 
+                    //Roll
+                    if (roll > 0 && roll > movementOffset){
+                        log.debug('Myo: Tilt left');
+                        //socketio.emit('drone',{'data':'tiltLeft'});
+                        socketio.emit('console', {'data':'Myo: Tilt left'});
+                        drone.setRollingSpider('tiltLeft');
+                    } else if (roll < 0 && roll < -movementOffset){
+                        log.debug('Myo: Tilt right');
+                        //socketio.emit('drone',{'data':'tiltRight'});
+                        socketio.emit('console', {'data':'Myo: Tilt right'});
+                        drone.setRollingSpider('tiltRight');
+                    }
 
+                    //Pitch
+                    if (pitch > 0 && pitch > movementOffset){
+                        log.debug('Myo: Move up');
+                        //socketio.emit('drone',{'data':'up'});
+                        socketio.emit('console', {'data':'Myo: Move up'});
+                        drone.setRollingSpider('up');
+                    } else if (pitch < 0 && pitch < -movementOffset){
+                        log.debug('Myo: Move down');
+                        //socketio.emit('drone',{'data':'down'});
+                        socketio.emit('console', {'data':'Myo: Move down'});
+                        drone.setRollingSpider('down');
+                    }
 
-                    //
                     //if ((movementOffset.y - data.y) > 0.4){
                     //    log.debug('Myo: Tilt left');
                     //    //socketio.emit('drone',{'data':'tiltLeft'});
