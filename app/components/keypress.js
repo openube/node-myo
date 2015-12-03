@@ -47,6 +47,11 @@ var setListeners = function(drone,myo,settings){
                 log.debug('Key: Take off');
                 break;
 
+            case 't':
+                drone.setRollingSpider('forceoff');
+                log.debug('Key: Force take off');
+                break;
+
             case 'h':
                 drone.setRollingSpider('hover');
                 //socketio.emit('drone',{'data':'hover'});
