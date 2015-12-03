@@ -3,10 +3,20 @@
 const RollingSpider   = require('rolling-spider');
 const log             = require('custom-logger').config({ level: 0 });
 const Q               = require('q');
+const stepsOffset     = {
+    'tiltLeft'  : 2,
+    'titleRight': 2,
+    'forward': 8,
+    'backward': 8,
+    'top': 0,
+    'down': 0,
+    'left': 8,
+    'right': 8
+};
 
 let isReady         = false;
 let hasTakeoff      = false;
-let defaultSteps    = 5;
+let defaultSteps    = 2;
 let settings;
 
 module.exports = {
@@ -75,38 +85,44 @@ module.exports = {
                 socketio.emit('drone', {'data':'takeoff'});
             }
             socketio.emit('droneStatus', hasTakeoff);
-            log.debug('drone: droneStatus =', hasTakeoff);
+            log.info('drone: droneStatus =', hasTakeoff);
         } else {
 
             switch (type) {
+                case 'forceoff':
+                    hasTakeoff = true;
+                    rollingSpider.flatTrim();
+                    rollingSpider.takeOff();
+                    socketio.emit('drone', {'data':'takeoff'});
+                    break;
                 case 'up':
-                    rollingSpider.up({ steps: steps});
+                    rollingSpider.up({ steps: steps + stepsOffset.up});
                     socketio.emit('drone', {'data':'up'});
                     break;
                 case 'down':
-                    rollingSpider.down({ steps: steps});
+                    rollingSpider.down({ steps: steps  + stepsOffset.down});
                     socketio.emit('drone', {'data':'down'});
                     break;
                 case 'left':
-                    rollingSpider.left({ steps: steps});
+                    rollingSpider.left({ steps: steps + stepsOffset.left});
                     break;
                 case 'right':
-                    rollingSpider.right({ steps: steps});
+                    rollingSpider.right({ steps: steps  + stepsOffset.right});
                     break;
                 case 'forward':
-                    rollingSpider.forward({ steps: steps});
+                    rollingSpider.forward({ steps: steps + stepsOffset.forward});
                     socketio.emit('drone', {'data':'forward'});
                     break;
                 case 'backward':
-                    rollingSpider.backward({ steps: steps});
+                    rollingSpider.backward({ steps: steps + stepsOffset.backward});
                     socketio.emit('drone', {'data':'backward'});
                     break;
                 case 'tiltLeft':
-                    rollingSpider.tiltLeft({ steps: steps});
+                    rollingSpider.tiltLeft({ steps: steps + stepsOffset.tiltLeft});
                     socketio.emit('drone', {'data':'tiltLeft'});
                     break;
                 case 'tiltRight':
-                    rollingSpider.tiltRight({ steps: steps});
+                    rollingSpider.tiltRight({ steps: steps + stepsOffset.tiltRight});
                     socketio.emit('drone', {'data':'tiltRight'});
                     break;
                 case 'hover':
