@@ -17,6 +17,10 @@
     position:relative;
     min-height:300px;
   }
+  @include element(video){
+    display: none;
+    position:relative;
+  }
   @include element(info){
     @include clearfix();
     border:1px solid lightblue;

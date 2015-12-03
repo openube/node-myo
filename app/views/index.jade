@@ -1,6 +1,13 @@
 extend _layout
 
 block content
+    .container__video
+        .video__container
+            .video__feed
+                //-video#videoFeed(width="400", height="300", preload="true", autoplay="true", loop="true", muted="true")
+                //-canvas#canvas(width="400" height="300")
+                //-video(is="video-color-tracking" target="magenta yellow cyan" camera="true" width="480" height="320" autoplay)
+                //-video(is="video-color-tracking" target="yellow" camera="true" width="640" height="480" autoplay)
     .container__visual
         .visual__container
             #drone.visual__drone.land
@@ -29,16 +36,22 @@ block content
                         li(data-type="x")
                         li(data-type="y")
                         li(data-type="z")
+            #movement.info__column
+                .info__block
+                    p Movement
+                    ul.info__list
+                        li(data-type="roll")
+                        li(data-type="pitch")
         .info__console
             #console.info__items
-    .container__status
-        ul.status__list
-            li.status__drone Drone
-            li.status__tunnel Local Tunnel
-            li.status__myo Myo
-            li.status__pebble Pebble
-            li.status__togglelock Locked
-            li.status__calibrate Calibration
+    //-.container__status
+    //-    ul.status__list
+    //-        li.status__drone Drone
+    //-        li.status__tunnel Local Tunnel
+    //-        li.status__myo Myo
+    //-        li.status__pebble Pebble
+    //-        li.status__togglelock Locked
+    //-        li.status__calibrate Calibration
 
     //-.container__actions
         //-ul.actions__list

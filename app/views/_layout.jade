@@ -4,6 +4,8 @@ html
         title #{title}
         meta(charset="UTF-8")
         link(href="static/css/main.css" rel="stylesheet")
+        script(src="/static/js/lib/platform/platform.js")
+        link(rel="import" href="/static/js/lib/video-color-tracking.html")
     body
         header.header
 
@@ -13,4 +15,5 @@ html
 
         script(type="text/javascript" src="/static/js/jquery-2.1.4.min.js")
         script(type="text/javascript" src="/static/js/socket.io-1.3.7.js")
+        //script(type="text/javascript" src="/static/js/lib/tracking.js/build/tracking-min.js")
         script(type="text/javascript" src="/static/js/main.js")
