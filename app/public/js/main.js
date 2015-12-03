@@ -4,8 +4,92 @@ var arr = [],
     hasTakeOff = false,
     timer;
 
+window.onload = function() {
+    //var canvas = document.getElementById('canvas');
+    //var context = canvas.getContext('2d');
+    //tracking.ColorTracker.registerColor('purple', function(r, g, b) {
+    //    var dx = r - 120;
+    //    var dy = g - 60;
+    //    var dz = b - 210;
+    //    if ((b - g) >= 100 && (r - g) >= 60) {
+    //        return true;
+    //    }
+    //    return dx * dx + dy * dy + dz * dz < 3500;
+    //});
+    //var tracker = new tracking.ColorTracker(['yellow', 'purple']);
+    //tracker.setMinDimension(5);
+    //tracking.track('#videoFeed', tracker);
+    //tracker.on('track', function(event) {
+    //    context.clearRect(0, 0, canvas.width, canvas.height);
+    //    event.data.forEach(function(rect) {
+    //        if (rect.color === 'custom') {
+    //            rect.color = tracker.customColor;
+    //        }
+    //        context.strokeStyle = rect.color;
+    //        context.strokeRect(rect.x, rect.y, rect.width, rect.height);
+    //        context.font = '11px Helvetica';
+    //        context.fillStyle = "#fff";
+    //        context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+    //        context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+    //    });
+    //});
+    //initGUIControllers(tracker);
+};
+
+
 $(function() {
     var socket = io.connect('http://localhost:1337');
+
+    //var debug;
+    //var video = document.querySelector('video');
+    //
+    //video.addEventListener('track', function(event) {
+    //    event.detail.data.forEach(function(rect) {
+    //        debug = plotRectangle(video, rect, debug);
+    //    });
+    //});
+    //
+    //function plotRectangle(el, rect, opt_div) {
+    //    var div = opt_div || document.createElement('div');
+    //    div.style.position = 'absolute';
+    //    div.style.border = '2px solid ' + (rect.color || 'magenta');
+    //    div.style.width = rect.width + 'px';
+    //    div.style.height = rect.height + 'px';
+    //    div.style.left = el.offsetLeft + rect.x + 'px';
+    //    div.style.top = el.offsetTop + rect.y + 'px';
+    //    document.body.appendChild(div);
+    //    return div;
+    //}
+
+    //var video = document.querySelector("#videoFeed");
+    //
+    //navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+    //
+    //if (navigator.getUserMedia) {
+    //    navigator.getUserMedia({video: true}, handleVideo, videoError);
+    //}
+
+    function handleVideo(stream) {
+        //video.src = window.URL.createObjectURL(stream);
+
+        //var colours = new tracking.ColorTracker(['magenta', 'cyan', 'yellow']);
+        //
+        //colours.on('track', function(event) {
+        //    if (event.data.length === 0) {
+        //        // No colors were detected in this frame.
+        //    } else {
+        //        event.data.forEach(function(rect) {
+        //            console.log(rect.x, rect.y, rect.height, rect.width, rect.color);
+        //        });
+        //    }
+        //});
+        //
+        //tracking.track('#videoFeed', colours);
+    }
+
+    function videoError(e) {
+        // do something
+    }
 
 
     socket.on('connect', function(data) {
