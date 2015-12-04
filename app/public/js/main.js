@@ -40,26 +40,26 @@ window.onload = function() {
 $(function() {
     var socket = io.connect('http://localhost:1337');
 
-    //var debug;
-    //var video = document.querySelector('video');
-    //
-    //video.addEventListener('track', function(event) {
-    //    event.detail.data.forEach(function(rect) {
-    //        debug = plotRectangle(video, rect, debug);
-    //    });
-    //});
-    //
-    //function plotRectangle(el, rect, opt_div) {
-    //    var div = opt_div || document.createElement('div');
-    //    div.style.position = 'absolute';
-    //    div.style.border = '2px solid ' + (rect.color || 'magenta');
-    //    div.style.width = rect.width + 'px';
-    //    div.style.height = rect.height + 'px';
-    //    div.style.left = el.offsetLeft + rect.x + 'px';
-    //    div.style.top = el.offsetTop + rect.y + 'px';
-    //    document.body.appendChild(div);
-    //    return div;
-    //}
+    var debug;
+    var video = document.querySelector('video');
+
+    video.addEventListener('track', function(event) {
+        event.detail.data.forEach(function(rect) {
+            debug = plotRectangle(video, rect, debug);
+        });
+    });
+
+    function plotRectangle(el, rect, opt_div) {
+        var div = opt_div || document.createElement('div');
+        div.style.position = 'absolute';
+        div.style.border = '2px solid ' + (rect.color || 'magenta');
+        div.style.width = rect.width + 'px';
+        div.style.height = rect.height + 'px';
+        div.style.left = el.offsetLeft + rect.x + 'px';
+        div.style.top = el.offsetTop + rect.y + 'px';
+        document.body.appendChild(div);
+        return div;
+    }
 
     //var video = document.querySelector("#videoFeed");
     //
