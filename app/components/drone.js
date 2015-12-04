@@ -39,7 +39,8 @@ module.exports = {
                 rollingSpider.startPing();
                 rollingSpider.flatTrim();
                 isReady = true;
-                log.info('Drone: rollingSpider is ready');
+                log.info('Drone: rollingSpider is ready. The fun begins!');
+                log.info('==============================================');
                 socketio.emit('console',{'data':'Drone: rollingSpider is ready'});
 
                 deferred.resolve(rollingSpider);
