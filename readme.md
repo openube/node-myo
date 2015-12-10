@@ -34,11 +34,19 @@ Build ```pebbleapp/pebblejs.js```as an app in [cloudpebble.net](http://cloudpebb
 cd app && npm install
 ```
 
+Running the app
+
 ```
-node app.js
+npm start
 ```
 
- Note: Make sure bluetooth is turned on.
+Running the app without tunnel proxy (disabled PebbleJS)
+
+```
+npm run dev
+```
+
+ Note: Make sure bluetooth is turned on and Myo USB receiver is connected
 
 ### Drone discovery
 
@@ -56,8 +64,8 @@ The web page serves three purposes:
 
 - Provide a Myo gestures representation, using a drone image.
 - Provide the IMU data output by Myo (Gyrocope, Accelerometer and Orientation). Outputs the reading every 250ms.
+- Provide calculated Pitch and Roll data
 - Output selected commands/operations being called behind the scene e.g. SocketIO is connected, etc.
-
 
 __Note:__ This is still a work in progress. A lot of keypresses are not ported over to the GUI. For the time being, it only displays the following detected gestures from Myo: tilt left, tilt right, takeoff and land
 
@@ -79,6 +87,8 @@ __Note:__ This is still a work in progress. A lot of keypresses are not ported o
 |m | Emergency landing|
 |h | Hover |
 |b | Flips 360 back |
+|h | Hover mode |
+|t | Force takeoff |
 |up arrow| Forward |
 |down arrow| Backward |
 |left arrow| Turn left |
@@ -102,8 +112,15 @@ __Note:__ This is still a work in progress. A lot of keypresses are not ported o
 |Ping | Test if it is able to reach the app service |
 |Take off| Drone takes off|
 |Land| Drone lands|
+|Hover| Hover mode|
 |Emergency|Emergency landing|
 |Front flip|Flips 360 front|
 |Back flip|Flips 360 back|
 |Left flip|Flips 360 left|
 |Right flip|Flips 360 right|
+
+##Known issues
+
+- There is a small delay in time between nodejs calls and the drone responding to it.
+- Unresponsive drone once it lands or crashed. The current fix is to reset the drone and restart the app
+
