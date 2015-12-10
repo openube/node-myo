@@ -43,7 +43,6 @@ var setListeners = function(drone,myo,settings){
 
             case 'space':
                 drone.setRollingSpider('takeoff');
-                //socketio.emit('drone',{'data':'takeoff'});
                 log.debug('Key: Take off');
                 break;
 
@@ -54,16 +53,15 @@ var setListeners = function(drone,myo,settings){
 
             case 'h':
                 drone.setRollingSpider('hover');
-                //socketio.emit('drone',{'data':'hover'});
                 log.debug('Key: Hover');
                 break;
 
             case 'b':
                 drone.setRollingSpider('flipback');
-                //socketio.emit('drone',{'data':'flipback'});
                 log.debug('Key: flipback');
                 break;
 
+            //TODO: Deprecated function
             case 'a':
                 myo.setAccelerometer();
                 log.debug('Key: Calibrated = ', myo.getAccelerometer());
@@ -77,7 +75,6 @@ var setListeners = function(drone,myo,settings){
 
             case 'z' :
                 drone.setRollingSpider('land');
-                //socketio.emit('drone',{'data':'land'});
                 log.debug('Key: Land');
                 break;
 

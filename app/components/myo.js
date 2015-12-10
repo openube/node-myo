@@ -101,8 +101,6 @@ module.exports = {
                     timeOffset = new Date().getTime();
                     if(!socketio) socketio = settings.module.socketio;
 
-                    //log.debug('roll ==>', roll, ', pitch==>', pitch);
-
                     //Roll
                     if (roll > 0 && roll > movementOffset){
                         log.debug('Myo: Tilt left');
@@ -129,6 +127,10 @@ module.exports = {
                         drone.setRollingSpider('down');
                     }
 
+                    /*
+                        Deprecated function. Calculating pitch and roll in real time
+                        instead manually offset-ing via a fixed accelerometer location
+                    */
                     //if ((movementOffset.y - data.y) > 0.4){
                     //    log.debug('Myo: Tilt left');
                     //    //socketio.emit('drone',{'data':'tiltLeft'});
@@ -172,6 +174,7 @@ module.exports = {
     },
 
     setAccelerometer : function(){
+        log.error('Myo.setAccelerometer()is deprecated. Gestures are now calculated in real time');
         movementOffset = accelerometer;
     },
 
